@@ -1,975 +1,1269 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#EEEEEE"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin">
+    android:background="#F5F7FA"
+    android:fillViewport="true"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
-        <androidx.cardview.widget.CardView
+        android:padding="16dp">
+
+        <!-- Header Card - Información Principal del Cliente -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-            <RelativeLayout
-                android:padding="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#E8ECF4"
+            app:strokeWidth="1dp">
 
-                <TextView
-                    android:id="@+id/formClienteTxt1"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Icono y Título Razón Social -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_gravity="center_vertical"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:background="@drawable/line"
-                    android:padding="5dp"
-                    android:text="Razon Social"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/textColorSecondary"
-                    android:textSize="15dp" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_my_calendar"
+                        android:tint="#6366F1"
+                        android:contentDescription="Icono empresa" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Razón Social"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/formClienteTxt2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:layout_below="@id/formClienteTxt1"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="@color/textColorSecondary"
-                    android:layout_marginTop="1dip"
-                    android:textSize="14dp"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Sin definir" />
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Sin definir"
+                    android:textColor="#1E293B"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="#F1F5F9" />
+
+                <!-- Nombre Comercial -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_info_details"
+                        android:tint="#8B5CF6"
+                        android:contentDescription="Icono nombre comercial" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Nombre Comercial"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/formClienteTxt4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Ninguna"
+                    android:textColor="#1E293B"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card - Identificación -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_view2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-            <RelativeLayout
-                android:padding="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#E8ECF4"
+            app:strokeWidth="1dp">
 
-                <TextView
-                    android:id="@+id/formClienteTxt3"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_gravity="center_vertical"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:background="@drawable/line"
-                    android:padding="5dp"
-                    android:text="Nombre Comercial"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/textColorSecondary"
-                    android:textSize="15dp" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_myplaces"
+                        android:tint="#10B981"
+                        android:contentDescription="Icono identificación" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Cédula / RUC"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
+                </LinearLayout>
+
                 <TextView
-                    android:id="@+id/formClienteTxt4"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/formClienteTxt6"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:textSize="14dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:layout_below="@id/formClienteTxt3"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:layout_marginTop="1dip"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Ninguna" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Sin definir"
+                    android:textColor="#1E293B"
+                    android:textSize="15sp"
+                    android:fontFamily="monospace" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card - Dirección -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_view3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-            <RelativeLayout
-                android:padding="8dp"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#E8ECF4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/formClienteTxt5"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:background="@drawable/line"
-                    android:textSize="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Cedula/RUC"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_mapmode"
+                        android:tint="#F59E0B"
+                        android:contentDescription="Icono dirección" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Dirección Principal"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
+                </LinearLayout>
+
                 <TextView
-                    android:id="@+id/formClienteTxt6"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/formClienteTxt8"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:textSize="14dp"
-                    android:paddingTop="5dp"
-                    android:layout_below="@id/formClienteTxt5"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:textColor="@color/textColorSecondary"
-                    android:layout_marginTop="1dip"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Sin definir" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Sin definir"
+                    android:textColor="#1E293B"
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="4dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="#F1F5F9" />
+
+                <TextView
+                    android:id="@+id/formClienteTxt9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:text="Dirección Secundaria"
+                    android:textColor="#64748B"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.05" />
+
+                <TextView
+                    android:id="@+id/formClienteTxt10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Sin definir"
+                    android:textColor="#1E293B"
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="4dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card - Contacto (Teléfonos) -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_view4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-            <RelativeLayout
-                android:padding="8dp"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#E8ECF4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/formClienteTxt7"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:background="@drawable/line"
-                    android:textSize="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Direccion"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_call"
+                        android:tint="#3B82F6"
+                        android:contentDescription="Icono teléfono" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt11"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Teléfono Principal"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
+                </LinearLayout>
+
                 <TextView
-                    android:id="@+id/formClienteTxt8"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/formClienteTxt12"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:textSize="14dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:paddingTop="5dp"
-                    android:layout_below="@id/formClienteTxt7"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:layout_marginTop="1dip"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Sin definir" />
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Sin definir"
+                    android:textColor="#1E293B"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="#F1F5F9" />
+
                 <TextView
-                    android:id="@+id/formClienteTxt9"
-                    android:layout_below="@+id/formClienteTxt8"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/formClienteTxt13"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:textSize="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Direccion Secundaria"
-                    android:textColor="@color/textColorPrimary"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:layout_marginStart="36dp"
+                    android:text="Teléfono Secundario"
+                    android:textColor="#64748B"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.05" />
+
                 <TextView
-                    android:id="@+id/formClienteTxt10"
-                    android:layout_below="@+id/formClienteTxt9"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/formClienteTxt14"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:textSize="14dp"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:layout_marginTop="1dip"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Sin definir" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Sin definir"
+                    android:textColor="#1E293B"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card - Correo Electrónico -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_view5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-            <RelativeLayout
-                android:padding="8dp"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#E8ECF4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/formClienteTxt11"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:background="@drawable/line"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Telefono"
-                    android:textSize="15dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_dialog_email"
+                        android:tint="#EC4899"
+                        android:contentDescription="Icono correo" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt15"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Correo Electrónico"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
+                </LinearLayout>
+
                 <TextView
-                    android:id="@+id/formClienteTxt12"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/formClienteTxt16"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:layout_below="@id/formClienteTxt11"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:layout_marginTop="1dip"
-                    android:textSize="14dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:paddingTop="5dp"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Sin definir" />
-                <TextView
-                    android:layout_below="@+id/formClienteTxt12"
-                    android:id="@+id/formClienteTxt13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Telefono 2"
-                    android:textSize="14dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-                <TextView
-                    android:id="@+id/formClienteTxt14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:layout_below="@id/formClienteTxt13"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:layout_marginTop="1dip"
-                    android:textSize="14dp"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Sin definir" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Sin definir"
+                    android:textColor="#3B82F6"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card - Fax -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_view6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-            <RelativeLayout
-                android:padding="8dp"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#E8ECF4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/formClienteTxt15"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:background="@drawable/line"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Correo Electronico"
-                    android:textSize="15dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-                <TextView
-                    android:id="@+id/formClienteTxt16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:layout_below="@id/formClienteTxt15"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:layout_marginTop="1dip"
-                    android:textSize="14dp"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Sin definir" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-            <RelativeLayout
-                android:padding="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/formClienteTxt17"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:background="@drawable/line"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Fax"
-                    android:textSize="15dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_send"
+                        android:tint="#6B7280"
+                        android:contentDescription="Icono fax" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt17"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Fax"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/formClienteTxt18"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:layout_below="@id/formClienteTxt17"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:layout_marginTop="1dip"
-                    android:textSize="14dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Sin definir" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Sin definir"
+                    android:textColor="#1E293B"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card - Estado con indicador visual -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_view8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-            <RelativeLayout
-                android:padding="8dp"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#E8ECF4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/formClienteTxt19"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:background="@drawable/line"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Estado"
-                    android:textSize="15dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/presence_online"
+                        android:tint="#10B981"
+                        android:contentDescription="Icono estado" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt19"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Estado"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/formClienteTxt20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:layout_below="@id/formClienteTxt19"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:layout_marginTop="1dip"
-                    android:layout_toRightOf="@+id/thumbnail"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:drawable/dialog_holo_light_frame"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
                     android:text="Deshabilitado"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:textSize="14dp"/>
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:textColor="#EF4444"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card - Observación y Vendedor -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-            <RelativeLayout
-                android:padding="8dp"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#E8ECF4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/formClienteTxt21"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Observación -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:background="@drawable/line"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Observacion"
-                    android:textSize="15dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_edit"
+                        android:tint="#F97316"
+                        android:contentDescription="Icono observación" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt21"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Observación"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/formClienteTxt22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:layout_below="@id/formClienteTxt21"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:layout_marginTop="1dip"
-                    android:textSize="14dp"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Sin definir" />
-                <TextView
-                    android:id="@+id/formClienteTxt101"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/formClienteTxt22"
-                    android:padding="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:background="@drawable/line"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Vendedor"
-                    android:textSize="15dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Sin definir"
+                    android:textColor="#1E293B"
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="4dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="#F1F5F9" />
+
+                <!-- Vendedor -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_share"
+                        android:tint="#06B6D4"
+                        android:contentDescription="Icono vendedor" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt101"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Vendedor"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/formClienteTxt102"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:layout_below="@id/formClienteTxt101"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:layout_marginTop="1dip"
-                    android:textSize="14dp"
-                    android:maxEms="5"
-                    android:ems="5"
-                    android:textColor="@color/textColorSecondary"
-                    android:paddingTop="5dp"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Sin definir" />
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Sin definir"
+                    android:textColor="#1E293B"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <!-- Card - Días Plazo -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-            <RelativeLayout
-                android:padding="8dp"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#E8ECF4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/formClienteTxt23"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:background="@drawable/line"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Dias Plazo"
-                    android:textSize="15dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_recent_history"
+                        android:tint="#8B5CF6"
+                        android:contentDescription="Icono días plazo" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt23"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Días Plazo"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/formClienteTxt31a"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:layout_below="@id/formClienteTxt23"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:layout_marginTop="1dip"
-                    android:textSize="14dp"
-                    android:paddingTop="5dp"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:textColor="@color/textColorSecondary"
-                    android:text="Sin definir" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Sin definir"
+                    android:textColor="#1E293B"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <!-- Card - Sector -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_view9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-            <RelativeLayout
-                android:padding="8dp"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#E8ECF4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/formClienteTxt33a"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:background="@drawable/line"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Sector"
-                    android:textSize="15dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_sort_by_size"
+                        android:tint="#14B8A6"
+                        android:contentDescription="Icono sector" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt33a"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Sector"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/formClienteTxt31b"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:layout_below="@id/formClienteTxt33a"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:layout_marginTop="1dip"
-                    android:textSize="14dp"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Sin definir" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Sin definir"
+                    android:textColor="#1E293B"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-
-        <!-- -->
-        <androidx.cardview.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <!-- Card - Lista de Precios -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_sector"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-            <RelativeLayout
-                android:padding="8dp"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#E8ECF4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/sector"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:background="@drawable/line"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Lista de Precios"
-                    android:textSize="15dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_agenda"
+                        android:tint="#EAB308"
+                        android:contentDescription="Icono lista precios" />
+
+                    <TextView
+                        android:id="@+id/sector"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Lista de Precios"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/formClienteSector"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:layout_below="@id/sector"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:layout_marginTop="1dip"
-                    android:textSize="14dp"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:hint="Mayorista" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-        <!-- -->
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="4dp"
+                    android:hint="Mayorista"
+                    android:textColor="#1E293B"
+                    android:textColorHint="#94A3B8"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-
-        <!-- -->
-        <!-- inicio de la agregacion de shipto -->
-
-        <androidx.cardview.widget.CardView
+        <!-- Card - Direcciones de Envío (ShipTo) -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/shipto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#E8ECF4"
+            app:strokeWidth="1dp">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp">
-
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_directions"
+                        android:tint="#6366F1"
+                        android:contentDescription="Icono envío" />
 
                     <TextView
                         android:id="@+id/formClienteShipto"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/button_borders"
-                        android:padding="5dp"
-                        android:text="Direcciones de Envio"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/textColorSecondary"
-                        android:textSize="15dp" />
-
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TableLayout
-                                android:id="@+id/tableShipto"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/line"
-                                android:stretchColumns="*">
-
-                            </TableLayout>
-                        </LinearLayout>
-
-                    </HorizontalScrollView>
-
-
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Direcciones de Envío"
+                        android:textColor="#1E293B"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
 
-        <!-- fin de la agregacion de shipto -->
-        <!-- -->
+                    <TableLayout
+                        android:id="@+id/tableShipto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/line"
+                        android:stretchColumns="*" />
+                </HorizontalScrollView>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-
-        <androidx.cardview.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <!-- Card - Georeferenciación -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_view7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1">
-            <RelativeLayout
-                android:padding="8dp"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#E8ECF4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/formClienteTxt01"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:background="@drawable/line"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Georeferenciacion"
-                    android:textSize="15dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-                <TextView
-                    android:id="@+id/formClienteTxt78"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="10dp"
-                    android:layout_below="@id/formClienteTxt01"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:layout_marginTop="1dip"
-                    android:textSize="14dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Sin definir" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view11"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:visibility="gone">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/formClienteTxt87"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="10dp"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:background="@drawable/line"
-                    android:padding="5dp"
-                    android:text="Informacion"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/textColorSecondary"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/formClienteTxt88"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/formClienteTxt87"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="5dp"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:padding="3dp"
-                    android:paddingTop="5dp"
-                    android:text="Administrador: "
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/textColorSecondary"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:id="@+id/formClienteTxt89"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/formClienteTxt87"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="1dip"
-                    android:layout_toRightOf="@+id/formClienteTxt88"
-                    android:text="Sin definir"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@color/textColorSecondary"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:id="@+id/formClienteTxt80"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/formClienteTxt88"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginBottom="5dp"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:padding="3dp"
-                    android:text="Compras: "
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/textColorSecondary"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:id="@+id/formClienteTxt81"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/formClienteTxt88"
-                    android:layout_marginTop="1dip"
-                    android:layout_toRightOf="@+id/formClienteTxt80"
-                    android:text="Sin definir"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@color/textColorSecondary"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:id="@+id/formClienteTxt82"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/formClienteTxt80"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_gravity="center_vertical"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:padding="3dp"
-                    android:text="Pagos: "
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/textColorSecondary"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:id="@+id/formClienteTxt83"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/formClienteTxt80"
-                    android:layout_marginTop="1dip"
-                    android:layout_toRightOf="@+id/formClienteTxt82"
-                    android:text="Sin definir"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:textColor="@color/textColorSecondary"
-                    android:textSize="12dp" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-
-
-        <!-- inicio de la agregacion de contactos -->
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/Contactos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp">
-
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_compass"
+                        android:tint="#EF4444"
+                        android:contentDescription="Icono geo" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt01"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Georeferenciación"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/formClienteTxt78"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Sin definir"
+                    android:textColor="#3B82F6"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card - Información adicional (oculta por defecto) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#FFF7ED"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#FED7AA"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_info_details"
+                        android:tint="#F97316"
+                        android:contentDescription="Icono info" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt87"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Información Adicional"
+                        android:textColor="#1E293B"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Administrador -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/formClienteTxt88"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Administrador:"
+                        android:textColor="#64748B"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt89"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Sin definir"
+                        android:textColor="#1E293B"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Compras -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/formClienteTxt80"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Compras:"
+                        android:textColor="#64748B"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt81"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Sin definir"
+                        android:textColor="#1E293B"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Pagos -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/formClienteTxt82"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pagos:"
+                        android:textColor="#64748B"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt83"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Sin definir"
+                        android:textColor="#1E293B"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card - Contactos -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/Contactos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#E8ECF4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_allfriends"
+                        android:tint="#8B5CF6"
+                        android:contentDescription="Icono contactos" />
 
                     <TextView
                         android:id="@+id/formClientecontacto"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/button_borders"
-                        android:padding="5dp"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
                         android:text="Contactos"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/textColorSecondary"
-                        android:textSize="15dp" />
-
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TableLayout
-                                android:id="@+id/tablecontactos"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/line"
-                                android:stretchColumns="*">
-
-                            </TableLayout>
-                        </LinearLayout>
-
-                    </HorizontalScrollView>
-
-
+                        android:textColor="#1E293B"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
 
-        <!-- fin de la agregacion de contactos -->
+                    <TableLayout
+                        android:id="@+id/tablecontactos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/line"
+                        android:stretchColumns="*" />
+                </HorizontalScrollView>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <!-- Card - Localidad -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-            <RelativeLayout
-                android:padding="8dp"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="#E8ECF4"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/formClienteTxt27"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:background="@drawable/line"
-                    android:textSize="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Localidad"
-                    android:layout_marginBottom="10dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-                <TextView
-                    android:id="@+id/formClienteTxt28"
-                    android:layout_below="@+id/formClienteTxt27"
-                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_menu_mylocation"
+                        android:tint="#0EA5E9"
+                        android:contentDescription="Icono localidad" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt27"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Localidad"
+                        android:textColor="#1E293B"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Provincia -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:layout_marginBottom="5dp"
-                    android:paddingTop="5dp"
-                    android:textColor="@color/textColorPrimary"
-                    android:textSize="12dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Provincia: "
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-                <TextView
-                    android:id="@+id/formClienteTxt29"
-                    android:layout_width="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/formClienteTxt28"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Provincia:"
+                        android:textColor="#64748B"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sin definir"
+                        android:textColor="#1E293B"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Cantón -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/formClienteTxt27"
-                    android:layout_marginTop="1dip"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:textSize="12dp"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:layout_toRightOf="@+id/formClienteTxt28"
-                    android:text="Sin definir" />
-                <TextView
-                    android:id="@+id/formClienteTxt30"
-                    android:layout_below="@+id/formClienteTxt28"
-                    android:layout_width="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/formClienteTxt30"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Cantón:"
+                        android:textColor="#64748B"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sin definir"
+                        android:textColor="#1E293B"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Parroquia -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Canton: "
-                    android:textColor="@color/textColorPrimary"
-                    android:textSize="12dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-                <TextView
-                    android:id="@+id/formClienteTxt31"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/formClienteTxt28"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:layout_marginTop="1dip"
-                    android:textColor="@color/textColorSecondary"
-                    android:textSize="12dp"
-                    android:layout_toRightOf="@+id/formClienteTxt30"
-                    android:text="Sin definir" />
-                <TextView
-                    android:id="@+id/formClienteTxt32"
-                    android:layout_below="@+id/formClienteTxt30"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:textColor="@color/textColorPrimary"
-                    android:textSize="12dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Parroquia: "
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-                <TextView
-                    android:id="@+id/formClienteTxt33"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/formClienteTxt30"
-                    android:textAppearance="?android:textAppearanceMedium"
-                    android:layout_marginTop="1dip"
-                    android:textColor="@color/textColorSecondary"
-                    android:textSize="12dp"
-                    android:layout_toRightOf="@+id/formClienteTxt32"
-                    android:text="Sin definir" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
+                    android:layout_marginStart="36dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/formClienteTxt32"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Parroquia:"
+                        android:textColor="#64748B"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt33"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sin definir"
+                        android:textColor="#1E293B"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Card - Fecha de Modificación -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_view12"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <RelativeLayout
-                android:padding="12dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="#F8FAFC"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeColor="#E2E8F0"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/formClienteTxt34"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textColor="@color/textColorSecondary"
-                    android:background="@drawable/line"
-                    android:textSize="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_alignTop="@+id/thumbnail"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Fecha de Modificacion"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-                <TextView
-                    android:id="@+id/formClienteTxt35"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="3dp"
-                    android:paddingTop="5dp"
-                    android:layout_below="@id/formClienteTxt34"
-                    android:textAppearance="?android:textAppearanceLarge"
-                    android:layout_marginTop="1dip"
-                    android:textColor="@color/textColorSecondary"
-                    android:textSize="12dp"
-                    android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Sin definir" />
-            </RelativeLayout>
-        </androidx.cardview.widget.CardView>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@android:drawable/ic_menu_recent_history"
+                        android:tint="#94A3B8"
+                        android:contentDescription="Icono fecha" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt34"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Última modificación:"
+                        android:textColor="#94A3B8"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/formClienteTxt35"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="Sin definir"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
 </ScrollView>
