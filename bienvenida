@@ -3,23 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#0A1628">
 
-    <!-- Franja decorativa superior azul corporativo -->
+    <!-- Círculo decorativo grande superior -->
     <View
         android:id="@+id/decorTop"
-        android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
         android:layout_alignParentTop="true"
-        android:background="#0095DA" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-180dp"
+        android:background="@android:color/transparent" />
 
-    <!-- Curva decorativa -->
+    <!-- Acento azul lateral izquierdo -->
     <View
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_below="@id/decorTop"
-        android:layout_marginTop="-40dp"
-        android:background="#FFFFFF" />
+        android:layout_width="6dp"
+        android:layout_height="120dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:background="#0095DA" />
 
     <!-- Contenedor principal -->
     <LinearLayout
@@ -27,133 +29,125 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:paddingStart="28dp"
-        android:paddingEnd="28dp">
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp">
 
         <!-- Espaciado superior -->
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.6" />
+            android:layout_weight="1" />
 
-        <!-- Logo con sombra elegante -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="100dp"
-            app:cardElevation="16dp"
-            android:layout_marginBottom="28dp">
+        <!-- Logo limpio sin card -->
+        <ImageView
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:scaleType="fitCenter"
+            android:layout_marginBottom="40dp"
+            app:srcCompat="@drawable/ecuafw" />
 
-            <ImageView
-                android:layout_width="@dimen/img_width_height"
-                android:layout_height="@dimen/img_width_height"
-                android:padding="20dp"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ecuafw" />
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- Título principal en azul corporativo -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="¡Bienvenido!"
-            android:textColor="#0095DA"
-            android:textSize="@dimen/slide_title"
-            android:textStyle="bold"
-            android:letterSpacing="0.03"
-            android:layout_marginBottom="6dp" />
-
-        <!-- Subtítulo de la app en gris corporativo -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SiCi-Movile Ecuasolutions"
-            android:textColor="#4D4D4D"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:letterSpacing="0.02"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Tagline -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tecnologías de la Información"
-            android:textColor="#7A7A7A"
-            android:textSize="14sp"
-            android:fontFamily="sans-serif-light"
-            android:layout_marginBottom="28dp" />
-
-        <!-- Línea decorativa azul -->
+        <!-- Línea azul superior -->
         <View
-            android:layout_width="50dp"
-            android:layout_height="3dp"
+            android:layout_width="80dp"
+            android:layout_height="2dp"
             android:background="#0095DA"
-            android:layout_marginBottom="28dp" />
+            android:layout_marginBottom="24dp" />
 
-        <!-- Card con descripción estilo corporativo -->
-        <androidx.cardview.widget.CardView
+        <!-- Título con estilo moderno -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BIENVENIDO"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.25"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Nombre de la app -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SiCi-Movile"
+            android:textColor="#0095DA"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Empresa -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ECUASOLUTIONS"
+            android:textColor="#8A9BB0"
+            android:textSize="14sp"
+            android:letterSpacing="0.3"
+            android:layout_marginBottom="40dp" />
+
+        <!-- Descripción con borde izquierdo -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#F5FAFD"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            android:layout_marginBottom="24dp">
+            android:orientation="horizontal"
+            android:layout_marginBottom="40dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <!-- Barra lateral azul -->
+            <View
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:background="#0095DA"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:layout_weight="1"
+                android:text="Configure la conexión y autentifíquese como vendedor para comenzar"
+                android:textColor="#6B7D93"
+                android:textSize="14sp"
+                android:lineSpacingExtra="6dp" />
 
-                <!-- Icono indicador -->
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="4dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="#0095DA"
-                    android:layout_marginBottom="16dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Para empezar a usar el sistema, configure la conexión y autentifíquese como vendedor"
-                    android:textAlignment="center"
-                    android:textColor="#4D4D4D"
-                    android:textSize="15sp"
-                    android:lineSpacingExtra="4dp" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
         <!-- Espaciado flexible -->
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1.2" />
 
-        <!-- Imagen Android -->
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginBottom="12dp"
-            app:tint="#0095DA"
-            app:srcCompat="@drawable/android" />
-
-        <!-- Texto inferior -->
-        <TextView
+        <!-- Sección inferior -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Powered by Android"
-            android:textColor="#AAAAAA"
-            android:textSize="11sp"
-            android:letterSpacing="0.15"
-            android:textAllCaps="true"
-            android:layout_marginBottom="24dp" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="32dp">
+
+            <!-- Imagen Android pequeña -->
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="12dp"
+                app:tint="#0095DA"
+                app:srcCompat="@drawable/android" />
+
+            <!-- Separador -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="24dp"
+                android:background="#2A3F5A"
+                android:layout_marginEnd="12dp" />
+
+            <!-- Texto inferior -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tecnologías de la Información"
+                android:textColor="#4A5D73"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
