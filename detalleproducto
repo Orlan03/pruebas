@@ -16,24 +16,29 @@
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="8dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:text="Codigo"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:elevation="2dp"/>
                 <TextView
                     android:id="@+id/formItemTxt2"
                     android:layout_width="wrap_content"
@@ -54,24 +59,29 @@
             android:id="@+id/card_view2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="8dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:text="Codigo Alterno"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:elevation="2dp"/>
                 <TextView
                     android:id="@+id/formItemTxt4"
                     android:layout_width="wrap_content"
@@ -91,24 +101,29 @@
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="8dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:text="Descripcion"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:elevation="2dp"/>
                 <TextView
                     android:id="@+id/formItemTxt6"
                     android:layout_width="wrap_content"
@@ -280,25 +295,30 @@
             android:id="@+id/card_view4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="8dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:padding="5dp"
+                    android:layout_marginBottom="12dp"
+                    android:padding="10dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:text="Listado de Precioso1"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:elevation="2dp"/>
                 <Button
                     android:id="@+id/show"
                     android:layout_width="wrap_content"
@@ -500,24 +520,29 @@
             android:id="@+id/card_view5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="8dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:text="Paga IVA"
-                    android:textSize="14dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:elevation="2dp"/>
                 <TextView
                     android:id="@+id/formItemTxt12"
                     android:layout_width="wrap_content"
@@ -564,25 +589,30 @@
             android:id="@+id/card_view10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginBottom="8dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt25"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:text="Categorizacion"
-                    android:layout_marginBottom="10dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:layout_marginBottom="12dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:elevation="2dp"/>
                 <TextView
                     android:id="@+id/formItemCat1"
                     android:layout_below="@+id/formItemTxt25"
@@ -813,26 +843,31 @@
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1">
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt7a"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:padding="5dp"
+                    android:layout_marginBottom="12dp"
+                    android:padding="10dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:text="Listado de Existencias"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:elevation="2dp"/>
                 <TableLayout
                     android:layout_below="@+id/formItemTxt7a"
                     android:id="@+id/listaExistenciaProducto"
@@ -895,24 +930,29 @@
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view12"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="12dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formClienteTxt34"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:text="Ult. Modificacion"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:elevation="2dp"/>
                 <TextView
                     android:id="@+id/formItemTxt39"
                     android:layout_width="wrap_content"
