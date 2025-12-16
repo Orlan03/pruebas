@@ -4,546 +4,663 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="#F5F5F5"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:layout_weight="1">
-        <TableLayout
-            android:layout_width="match_parent"
-            android:dividerPadding="10dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1">
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textStyle="bold"
-                    android:textAllCaps="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:gravity="center"
-                    android:text="Empresa"
-                    android:layout_weight="1" />
-            </TableRow>
+        android:padding="16dp">
 
-            <TableRow
+        <!-- Sección Empresa -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:contentPadding="20dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dip">
+                android:orientation="vertical">
+
+                <!-- Título Empresa -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+                    
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="24dp"
+                        android:background="#2196F3"
+                        android:layout_marginEnd="12dp"/>
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Información de Empresa"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#212121"/>
+                </LinearLayout>
+
+                <!-- Código -->
                 <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="Codigo"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Código"
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
                 <EditText
-                    android:focusable="false"
                     android:id="@+id/conf_emp_codigo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    style="@style/login_edit_text"
-                    android:layout_weight="4"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:focusable="false"
                     android:enabled="false"
+                    style="@style/login_edit_text"
                     android:hint="@string/hint_codigo_empresa"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:background="@drawable/text_field"/>
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
+                    android:textSize="16sp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/text_field"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Empresa -->
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="Empresa"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
+                    android:layout_height="wrap_content"
+                    android:text="Nombre de Empresa"
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
                 <EditText
                     android:id="@+id/conf_emp_nombre"
-                    android:layout_width="wrap_content"
-                    android:layout_weight="4"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     style="@style/login_edit_text"
                     android:hint="@string/hint_nombre_empresa"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:background="@drawable/text_field"/>
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
+                    android:textSize="16sp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/text_field"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Teléfono -->
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="Telefono"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
+                    android:layout_height="wrap_content"
+                    android:text="Teléfono"
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
                 <EditText
                     android:id="@+id/conf_emp_tel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     style="@style/login_edit_text"
-                    android:layout_weight="4"
                     android:hint="@string/hint_telefono_empresa"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:background="@drawable/text_field"/>
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
+                    android:textSize="16sp"
+                    android:inputType="phone"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/text_field"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Dirección -->
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="Direccion"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
+                    android:layout_height="wrap_content"
+                    android:text="Dirección"
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
                 <EditText
                     android:id="@+id/conf_emp_dir"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     style="@style/login_edit_text"
-                    android:layout_weight="4"
                     android:hint="@string/hint_direccion_empresa"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:background="@drawable/text_field"/>
-            </TableRow>
+                    android:textSize="16sp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/text_field"
+                    android:layout_marginBottom="12dp"/>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
+                <!-- Logotipo -->
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="Logotipo"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
-                <EditText
-                    android:focusable="false"
-                    android:enabled="false"
-                    android:id="@+id/conf_emp_logo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    style="@style/login_edit_text"
-                    android:layout_weight="4"
-                    android:hint="@string/hint_logo_empresa"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:background="@drawable/text_field"/>
-                <Button
-                    android:id="@+id/conf_emp_upload"
-                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:text="..."/>
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
+                    android:text="Logotipo"
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
+                    <EditText
+                        android:id="@+id/conf_emp_logo"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:focusable="false"
+                        android:enabled="false"
+                        style="@style/login_edit_text"
+                        android:hint="@string/hint_logo_empresa"
+                        android:textSize="16sp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:background="@drawable/text_field"
+                        android:layout_marginEnd="8dp"/>
+                    <Button
+                        android:id="@+id/conf_emp_upload"
+                        android:layout_width="56dp"
+                        android:layout_height="50dp"
+                        android:text="📁"
+                        android:textSize="20sp"
+                        android:background="?attr/selectableItemBackground"/>
+                </LinearLayout>
+
+                <!-- IVA -->
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="IVA"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
+                    android:layout_height="wrap_content"
+                    android:text="IVA (%)"
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
                 <EditText
                     android:id="@+id/conf_emp_iva"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     style="@style/login_edit_text"
-                    android:layout_weight="4"
                     android:hint="@string/hint_porcentaje_iva"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:background="@drawable/text_field"/>
+                    android:textSize="16sp"
+                    android:inputType="numberDecimal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/text_field"
+                    android:layout_marginBottom="12dp"/>
 
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="Utilizar Rutas"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
-                <CheckBox
-                    android:id="@+id/conf_emp_rutas"
-                    android:layout_weight="4"/>
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textStyle="bold"
-                    android:textAllCaps="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:gravity="center"
-                    android:text="IMpresion "
-                    android:layout_weight="1" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="Imprimir"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
-                <CheckBox
-                    android:id="@+id/conf_emp_imprimir"
-                    android:layout_weight="4"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="Impresora"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
-                <EditText
-                    android:id="@+id/conf_emp_impresora"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    style="@style/login_edit_text"
-                    android:layout_weight="4"
-                    android:hint="@string/hint_nombre_impresora"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:background="@drawable/text_field"/>
-                <Button
-                    android:id="@+id/conf_emp_search_print"
-                    android:layout_width="50dp"
+                <!-- Utilizar Rutas -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/abc_ic_search_api_material"/>
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:background="?attr/selectableItemBackground">
+                    <CheckBox
+                        android:id="@+id/conf_emp_rutas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Utilizar Rutas"
+                        android:textSize="16sp"
+                        android:textColor="#212121"
+                        android:layout_marginStart="8dp"/>
+                </LinearLayout>
 
-            </TableRow>
-            <!--Configuracion Cobros-->
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textStyle="bold"
-                    android:textAllCaps="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:gravity="center"
-                    android:text="Cobros "
-                    android:layout_weight="1" />
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="Generar Interes"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            </TableRow>
-            <!--Configuracion Usuario-->
-            <TableRow
+        <!-- Sección Impresión -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:contentPadding="20dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Título Impresión -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+                    
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="24dp"
+                        android:background="#4CAF50"
+                        android:layout_marginEnd="12dp"/>
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Configuración de Impresión"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#212121"/>
+                </LinearLayout>
+
+                <!-- Imprimir -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="?attr/selectableItemBackground">
+                    <CheckBox
+                        android:id="@+id/conf_emp_imprimir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Habilitar Impresión"
+                        android:textSize="16sp"
+                        android:textColor="#212121"
+                        android:layout_marginStart="8dp"/>
+                </LinearLayout>
+
+                <!-- Impresora -->
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre de Impresora"
+                    android:textSize="12sp"
+                    android:textColor="#757575"
                     android:textStyle="bold"
-                    android:textAllCaps="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:gravity="center"
-                    android:text="Usuario"
-                    android:layout_weight="1" />
-            </TableRow>
-            <TableRow
+                    android:layout_marginTop="8dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
+                    <EditText
+                        android:id="@+id/conf_emp_impresora"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        style="@style/login_edit_text"
+                        android:hint="@string/hint_nombre_impresora"
+                        android:textSize="16sp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:background="@drawable/text_field"
+                        android:layout_marginEnd="8dp"/>
+                    <Button
+                        android:id="@+id/conf_emp_search_print"
+                        android:layout_width="56dp"
+                        android:layout_height="50dp"
+                        android:drawableLeft="@drawable/abc_ic_search_api_material"
+                        android:background="?attr/selectableItemBackground"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Sección Cobros -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:contentPadding="20dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Título Cobros -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+                    
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="24dp"
+                        android:background="#FF9800"
+                        android:layout_marginEnd="12dp"/>
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Configuración de Cobros"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#212121"/>
+                </LinearLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="Codigo"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
+                    android:layout_height="wrap_content"
+                    android:text="Generar Interés"
+                    android:textSize="16sp"
+                    android:textColor="#757575"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Sección Usuario -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:contentPadding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Título Usuario -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+                    
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="24dp"
+                        android:background="#9C27B0"
+                        android:layout_marginEnd="12dp"/>
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Información de Usuario"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#212121"/>
+                </LinearLayout>
+
+                <!-- Código Usuario -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Código"
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
                 <EditText
+                    android:id="@+id/conf_usr_codigo"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     android:enabled="false"
                     android:focusable="false"
-                    android:id="@+id/conf_usr_codigo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
                     style="@style/login_edit_text"
-                    android:layout_weight="4"
                     android:hint="@string/hint_codigo_empresa"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:background="@drawable/text_field"/>
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
+                    android:textSize="16sp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/text_field"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Nombres -->
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
+                    android:layout_height="wrap_content"
                     android:text="Nombres"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
                 <EditText
                     android:id="@+id/conf_usr_nombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     style="@style/login_edit_text"
-                    android:layout_weight="4"
                     android:hint="@string/hint_nombre_usuario"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:background="@drawable/text_field"/>
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
+                    android:textSize="16sp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/text_field"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Password -->
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="Password"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
+                    android:layout_height="wrap_content"
+                    android:text="Contraseña"
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
                 <EditText
                     android:id="@+id/conf_usr_pass"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     style="@style/login_edit_text"
-                    android:layout_weight="4"
                     android:hint="@string/hint_password_usuario"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:background="@drawable/text_field"/>
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
+                    android:textSize="16sp"
+                    android:inputType="textPassword"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/text_field"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Grupo -->
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
+                    android:layout_height="wrap_content"
                     android:text="Grupo"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
                 <EditText
                     android:id="@+id/conf_usr_grupo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     style="@style/login_edit_text"
-                    android:layout_weight="4"
                     android:focusable="false"
                     android:enabled="false"
                     android:hint="@string/hint_grupo_usuario"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:background="@drawable/text_field"/>
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
+                    android:textSize="16sp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/text_field"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Código Vendedor -->
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="Cod. Vendedor"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
+                    android:layout_height="wrap_content"
+                    android:text="Código de Vendedor"
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
                 <EditText
                     android:id="@+id/conf_usr_vendedor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
                     style="@style/login_edit_text"
-                    android:layout_weight="4"
                     android:enabled="false"
                     android:focusable="false"
                     android:hint="@string/hint_vendedor_usuario"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:background="@drawable/text_field"/>
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="Supervisor"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
-                <CheckBox
-                    android:id="@+id/conf_usr_super"
-                    android:layout_weight="4"/>
-            </TableRow>
+                    android:textSize="16sp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/text_field"
+                    android:layout_marginBottom="12dp"/>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textStyle="bold"
-                    android:textAllCaps="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:gravity="center"
-                    android:text="conexion"
-                    android:layout_weight="1" />
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="Direccion IP"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
-                <EditText
-                    android:id="@+id/conf_emp_ip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    style="@style/login_edit_text"
-                    android:layout_weight="4"
-                    android:hint="@string/hint_ip_conexion"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:background="@drawable/text_field"/>
+                <!-- Supervisor -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:background="?attr/selectableItemBackground">
+                    <CheckBox
+                        android:id="@+id/conf_usr_super"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Es Supervisor"
+                        android:textSize="16sp"
+                        android:textColor="#212121"
+                        android:layout_marginStart="8dp"/>
+                </LinearLayout>
 
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="Puerto"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
-                <EditText
-                    android:id="@+id/conf_emp_port"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    style="@style/login_edit_text"
-                    android:layout_weight="4"
-                    android:hint="@string/hint_port_conexion"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:background="@drawable/text_field"/>
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:padding="5dip"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/header_fields"
-                    android:gravity="center"
-                    android:text="URL"
-                    android:textColor="@color/textColorPrimary"
-                    android:layout_weight="1" />
-                <EditText
-                    android:id="@+id/conf_emp_url"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    style="@style/login_edit_text"
-                    android:layout_weight="4"
-                    android:hint="@string/hint_url_conexion"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:background="@drawable/text_field"/>
-            </TableRow>
-            <Button
-                android:id="@+id/btnInitImport"
+        <!-- Sección Conexión -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:contentPadding="20dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="crear &amp; destruir"
-                android:layout_marginTop="25dp"/>
-        </TableLayout>
+                android:orientation="vertical">
+
+                <!-- Título Conexión -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+                    
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="24dp"
+                        android:background="#F44336"
+                        android:layout_marginEnd="12dp"/>
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Configuración de Conexión"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="#212121"/>
+                </LinearLayout>
+
+                <!-- Dirección IP -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dirección IP"
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
+                <EditText
+                    android:id="@+id/conf_emp_ip"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    style="@style/login_edit_text"
+                    android:hint="@string/hint_ip_conexion"
+                    android:textSize="16sp"
+                    android:inputType="text"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/text_field"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Puerto -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Puerto"
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
+                <EditText
+                    android:id="@+id/conf_emp_port"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    style="@style/login_edit_text"
+                    android:hint="@string/hint_port_conexion"
+                    android:textSize="16sp"
+                    android:inputType="number"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/text_field"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- URL -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="URL"
+                    android:textSize="12sp"
+                    android:textColor="#757575"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
+                <EditText
+                    android:id="@+id/conf_emp_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    style="@style/login_edit_text"
+                    android:hint="@string/hint_url_conexion"
+                    android:textSize="16sp"
+                    android:inputType="textUri"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:background="@drawable/text_field"
+                    android:layout_marginBottom="12dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Botón Final -->
+        <Button
+            android:id="@+id/btnInitImport"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Crear &amp; Destruir"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:background="#2196F3"
+            android:elevation="2dp"
+            android:stateListAnimator="@null"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"/>
 
     </LinearLayout>
 </ScrollView>
