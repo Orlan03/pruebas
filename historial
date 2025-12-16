@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
     android:background="@color/dividerColor"
+    android:clipToPadding="false"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".reportes.Historial"
     tools:showIn="@layout/activity_historial">
@@ -27,20 +28,22 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                card_view:cardCornerRadius="12dp">
+                card_view:cardCornerRadius="12dp"
+                card_view:cardUseCompatPadding="true"
+                card_view:cardElevation="4dp"
+                card_view:cardBackgroundColor="@android:color/white">
                 <RelativeLayout
-                    android:padding="8dp"
+                    android:padding="12dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    //seccion cabecera
+                    <!-- seccion cabecera -->
                     <TableLayout
                         android:layout_below="@+id/formItemTxt3"
                         android:layout_width="match_parent"
@@ -51,10 +54,11 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="5dp"
+                            android:padding="8dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:background="@drawable/line"
-                            android:textSize="15dp"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
                             android:layout_gravity="center_vertical"
                             android:layout_alignTop="@+id/thumbnail"
                             android:layout_toRightOf="@+id/thumbnail"
@@ -117,26 +121,29 @@
                                 android:background="@drawable/button_controls"
                                 android:layout_marginBottom="5dp"
                                 android:textColor="@color/textColor"
-                                android:text="buscar" />
+                                android:text="Buscar"
+                                android:textAllCaps="true" />
                         </TableRow>
                     </TableLayout>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                card_view:cardCornerRadius="12dp">
+                card_view:cardCornerRadius="12dp"
+                card_view:cardUseCompatPadding="true"
+                card_view:cardElevation="4dp"
+                card_view:cardBackgroundColor="@android:color/white">
                 <RelativeLayout
                     android:id="@+id/contenedorItems"
-                    android:padding="8dp"
+                    android:padding="12dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    //seccion cabecera
+                    <!-- seccion cabecera -->
                     <TableLayout
                         android:id="@+id/sectionCliente"
                         android:layout_below="@+id/formItemTxt3"
@@ -149,10 +156,11 @@
                             android:id="@+id/formItemTxt4"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="5dp"
+                            android:padding="8dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:background="@drawable/line"
-                            android:textSize="15dp"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
                             android:layout_gravity="center_vertical"
                             android:layout_alignTop="@+id/thumbnail"
                             android:layout_toRightOf="@+id/thumbnail"
@@ -242,13 +250,16 @@
                 android:layout_marginBottom="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                card_view:cardCornerRadius="12dp">
+                card_view:cardCornerRadius="12dp"
+                card_view:cardUseCompatPadding="true"
+                card_view:cardElevation="4dp"
+                card_view:cardBackgroundColor="@android:color/white">
                 <RelativeLayout
-                    android:padding="8dp"
+                    android:padding="12dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    //seccion cabecera
+                    <!-- seccion cabecera -->
                     <TableLayout
                         android:id="@+id/cabeceraHistorial"
                         android:layout_below="@+id/formItemTxt3"
@@ -261,10 +272,11 @@
                             android:id="@+id/formItemTxt7"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="5dp"
+                            android:padding="8dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:background="@drawable/line"
-                            android:textSize="15dp"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
                             android:layout_gravity="center_vertical"
                             android:layout_alignTop="@+id/thumbnail"
                             android:layout_toRightOf="@+id/thumbnail"
