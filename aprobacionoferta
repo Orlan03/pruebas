@@ -4,23 +4,137 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F7FA"
     android:fitsSystemWindows="true"
     tools:context="com.ecuasolutions.sicimovile.AprobacionOferta">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:fitsSystemWindows="true"
+        android:stateListAnimator="@null"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="160dp"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleGravity="bottom|start"
+            app:expandedTitleMarginStart="24dp"
+            app:expandedTitleMarginBottom="20dp"
+            app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:statusBarScrim="?attr/colorPrimaryDark"
+            app:scrimAnimationDuration="300">
+
+            <!-- Fondo con color primario -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/colorPrimary"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7" />
+
+            <!-- Capa decorativa superior con transparencia -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.08"
+                android:background="@android:color/white"
+                app:layout_collapseMode="parallax" />
+
+            <!-- Elemento decorativo circular en el centro -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.5">
+
+                <View
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:alpha="0.12"
+                    android:background="@android:color/white" />
+
+                <View
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:alpha="0.06"
+                    android:background="@android:color/white" />
+
+            </FrameLayout>
+
+            <!-- Toolbar con diseño pin para que se mantenga fijo -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleTextColor="@android:color/white" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_aprobacion_oferta" />
+    <!-- Contenedor principal con scroll suave -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:overScrollMode="ifContentScrolls"
+        android:scrollbarStyle="outsideOverlay"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <!-- Sombra sutil superior -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:alpha="0.1"
+                android:background="@android:color/black" />
+
+            <!-- Contenido de la oferta -->
+            <include layout="@layout/content_aprobacion_oferta" />
+
+            <!-- Espaciado inferior para evitar que el FAB tape contenido -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="88dp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Botón de acción flotante para aprobar -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_aprobar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="24dp"
+        android:elevation="12dp"
+        android:text="Aprobar"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        app:backgroundTint="@color/colorAccent"
+        app:icon="@android:drawable/ic_menu_send"
+        app:iconTint="@android:color/white"
+        app:rippleColor="#40FFFFFF" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
