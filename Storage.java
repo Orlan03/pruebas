@@ -62,7 +62,8 @@ import com.ecuasolutions.sicimovile.pedido.dialogs.megalimpio.CrearItemDialogFra
 public class Storage extends SQLiteOpenHelper {
 
     public static final String DB_Name = "SiCi-movile-megalimpio"; //public static final String DB_Name = "SiCi-movile";
-    public static final int SCHEME_VERSION = 1;
+    // Importante: si agregas tablas nuevas, incrementa la versión y migra en onUpgrade()
+    public static final int SCHEME_VERSION = 2;
     public SQLiteDatabase db;
 
     public Storage(Context context) {
@@ -71,52 +72,67 @@ public class Storage extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(Empresa.CREATE_DB_TABLE);
-        db.execSQL(Grupo.CREATE_DB_TABLE);
-        db.execSQL(GNTrans.CREATE_DB_TABLE);
-        db.execSQL(GNOpcion.CREATE_DB_TABLE);
-        db.execSQL(Permiso.CREATE_DB_TABLE);
-        db.execSQL(PermisoTrans.CREATE_DB_TABLE);
-        db.execSQL(Usuario.CREATE_DB_TABLE);
-        db.execSQL(Provincia.CREATE_DB_TABLE);
-        db.execSQL(Canton.CREATE_DB_TABLE);
-        db.execSQL(Parroquia.CREATE_DB_TABLE);
-        db.execSQL(PCGrupo1.CREATE_DB_TABLE);
-        db.execSQL(PCGrupo2.CREATE_DB_TABLE);
-        db.execSQL(PCGrupo3.CREATE_DB_TABLE);
-        db.execSQL(PCGrupo4.CREATE_DB_TABLE);
-        db.execSQL(Cliente.CREATE_DB_TABLE);
-        db.execSQL(Vendedor.CREATE_DB_TABLE);
-        db.execSQL(Contactos.CREATE_DB_TABLE);
-        db.execSQL(Shipto.CREATE_DB_TABLE);
-        db.execSQL(PedidoPendiente.CREATE_DB_TABLE);
-        db.execSQL(DETALLE.CREATE_DB_TABLE);
-        /*Inventario*/
-        db.execSQL(IVGrupo1.CREATE_DB_TABLE);
-        db.execSQL(IVGrupo2.CREATE_DB_TABLE);
-        db.execSQL(IVGrupo3.CREATE_DB_TABLE);
-        db.execSQL(IVGrupo4.CREATE_DB_TABLE);
-        db.execSQL(IVGrupo5.CREATE_DB_TABLE);
-        db.execSQL(IVGrupo6.CREATE_DB_TABLE);
-        db.execSQL(IVInventario.CREATE_DB_TABLE);
-        db.execSQL(Bodega.CREATE_DB_TABLE);
-        db.execSQL(Promocion.CREATE_DB_TABLE);
-        db.execSQL(Descuento.CREATE_DB_TABLE);
-        db.execSQL(Existencia.CREATE_DB_TABLE);
-        /*Transacciones*/
-        db.execSQL(Transaccion.CREATE_DB_TABLE);
-        //db.execSQL(Transaccion.CREATE_TRIGGER_NEW_TRANS);
+        ensureSchema(db);
+    }
 
-        db.execSQL(IVKardex.CREATE_DB_TABLE);
-        db.execSQL(TSFormaCobroPago.CREATE_DB_TABLE);
-        db.execSQL(Banco.CREATE_DB_TABLE);
-        db.execSQL(PCKardex.CREATE_DB_TABLE);
-        /*Reporte para cobro*/
-        db.execSQL(KardexTransaccion.CREATE_DB_TABLE);
-        db.execSQL(TSRetencion.CREATE_DB_TABLE);
-        db.execSQL(Cheque.CREATE_DB_TABLE);
-        db.execSQL(Retencion.CREATE_DB_TABLE);
+    /**
+     * Crea (si faltan) las tablas del esquema.
+     * Importante: muchos CREATE_TABLE no tienen IF NOT EXISTS, por eso usamos try/catch.
+     */
+    private void ensureSchema(SQLiteDatabase db) {
+        String[] creates = new String[]{
+                Empresa.CREATE_DB_TABLE,
+                Grupo.CREATE_DB_TABLE,
+                GNTrans.CREATE_DB_TABLE,
+                GNOpcion.CREATE_DB_TABLE,
+                Permiso.CREATE_DB_TABLE,
+                PermisoTrans.CREATE_DB_TABLE,
+                Usuario.CREATE_DB_TABLE,
+                Provincia.CREATE_DB_TABLE,
+                Canton.CREATE_DB_TABLE,
+                Parroquia.CREATE_DB_TABLE,
+                PCGrupo1.CREATE_DB_TABLE,
+                PCGrupo2.CREATE_DB_TABLE,
+                PCGrupo3.CREATE_DB_TABLE,
+                PCGrupo4.CREATE_DB_TABLE,
+                Cliente.CREATE_DB_TABLE,
+                Vendedor.CREATE_DB_TABLE,
+                Contactos.CREATE_DB_TABLE,
+                Shipto.CREATE_DB_TABLE,
+                PedidoPendiente.CREATE_DB_TABLE,
+                DETALLE.CREATE_DB_TABLE,
+                /*Inventario*/
+                IVGrupo1.CREATE_DB_TABLE,
+                IVGrupo2.CREATE_DB_TABLE,
+                IVGrupo3.CREATE_DB_TABLE,
+                IVGrupo4.CREATE_DB_TABLE,
+                IVGrupo5.CREATE_DB_TABLE,
+                IVGrupo6.CREATE_DB_TABLE,
+                IVInventario.CREATE_DB_TABLE,
+                Bodega.CREATE_DB_TABLE,
+                Promocion.CREATE_DB_TABLE,
+                Descuento.CREATE_DB_TABLE,
+                Existencia.CREATE_DB_TABLE,
+                /*Transacciones*/
+                Transaccion.CREATE_DB_TABLE,
+                IVKardex.CREATE_DB_TABLE,
+                TSFormaCobroPago.CREATE_DB_TABLE,
+                Banco.CREATE_DB_TABLE,
+                PCKardex.CREATE_DB_TABLE,
+                /*Reporte para cobro*/
+                KardexTransaccion.CREATE_DB_TABLE,
+                TSRetencion.CREATE_DB_TABLE,
+                Cheque.CREATE_DB_TABLE,
+                Retencion.CREATE_DB_TABLE
+        };
 
+        for (String sql : creates) {
+            try {
+                db.execSQL(sql);
+            } catch (Exception ignored) {
+                // tabla ya existe o sentencia no aplicable en esta versión
+            }
+        }
     }
     public void deleteAll() {
         db = this.getWritableDatabase();
@@ -175,7 +191,8 @@ public class Storage extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        // Migración segura: crea tablas faltantes sin borrar datos.
+        ensureSchema(db);
     }
 
     public String upgradeDatabase(double versiontablet, double versionactual) {
