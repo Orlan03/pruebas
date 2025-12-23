@@ -667,11 +667,87 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
         }
         return filteredModelList;
     }
-    private String[] getLineasParaBusqueda() {
-        if (lineaSeleccionada == null || lineaSeleccionada.trim().isEmpty()) {
-            return (lineas != null) ? lineas : new String[0];
+
+    /**
+     * Expande una "línea" a posibles variantes para filtrar.
+     * En muchos catálogos la línea llega como "COD - DESCRIPCION" o "COD|DESCRIPCION".
+     * Como no tenemos garantía de si la BD guarda el código o la descripción,
+     * enviamos ambas variantes para aumentar probabilidad de match.
+     */
+    private static List<String> expandLineaVariants(String raw) {
+        List<String> out = new ArrayList<>();
+        if (raw == null) return out;
+        String t = raw.trim();
+        if (t.isEmpty()) return out;
+        if ("null".equalsIgnoreCase(t)) return out;
+        if ("todas".equalsIgnoreCase(t)) return out;
+
+        // Siempre incluir el texto completo.
+        out.add(t);
+
+        // Separadores comunes: "|" ";" ":" " - " "-"
+        String normalized = t;
+        // Primero el caso más común " - " para no romper códigos con guiones internos.
+        if (normalized.contains(" - ")) {
+            String[] parts = normalized.split("\\s-\\s");
+            for (String p : parts) {
+                String s = p == null ? "" : p.trim();
+                if (!s.isEmpty() && !"null".equalsIgnoreCase(s)) out.add(s);
+            }
+        } else {
+            // Otros separadores simples
+            String[] seps = new String[]{"\\|", ";", ":", "-"};
+            for (String sep : seps) {
+                if (normalized.contains(sep.replace("\\", ""))) {
+                    String[] parts = normalized.split(sep);
+                    for (String p : parts) {
+                        String s = p == null ? "" : p.trim();
+                        if (!s.isEmpty() && !"null".equalsIgnoreCase(s)) out.add(s);
+                    }
+                }
+            }
         }
-        return new String[]{ lineaSeleccionada };
+
+        // Deduplicar preservando orden
+        List<String> dedup = new ArrayList<>();
+        for (String v : out) {
+            if (v == null) continue;
+            String s = v.trim();
+            if (s.isEmpty()) continue;
+            boolean exists = false;
+            for (String d : dedup) {
+                if (d.equalsIgnoreCase(s)) {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) dedup.add(s);
+        }
+        return dedup;
+    }
+
+    private String[] getLineasParaBusqueda() {
+        // Si el usuario escogió una línea específica, filtramos solo por esa.
+        if (lineaSeleccionada != null && !lineaSeleccionada.trim().isEmpty()) {
+            List<String> variants = expandLineaVariants(lineaSeleccionada);
+            return variants.isEmpty() ? null : variants.toArray(new String[0]);
+        }
+
+        // "Todas": si no hay lista de líneas disponible, NO aplicar filtro de líneas.
+        if (lineas == null || lineas.length == 0) {
+            return null;
+        }
+
+        // Limpiar líneas inválidas (null, "", "null") para evitar consultas tipo IN ().
+        List<String> cleaned = new ArrayList<>();
+        for (String l : lineas) {
+            if (l == null) continue;
+            String t = l.trim();
+            if (t.isEmpty() || "null".equalsIgnoreCase(t)) continue;
+            // Expandir variantes para cubrir "COD - DESC", etc.
+            cleaned.addAll(expandLineaVariants(t));
+        }
+        return cleaned.isEmpty() ? null : cleaned.toArray(new String[0]);
     }
 
     /**********************************************************
@@ -691,9 +767,20 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
             Cursor cursor = null;
             try {
                 buscar = autoCompleteItem.getText().toString();
+                String[] lineasFiltro = getLineasParaBusqueda();
+                // Si la app no logró cargar líneas, evitamos pasar array vacío (suele dejar la consulta sin resultados).
+                if (lineasFiltro != null && lineasFiltro.length == 0) {
+                    lineasFiltro = null;
+                }
+                Timber.d("BUSCAR => '%s' | CONSTRAINT => '%s' | LINEA_SEL => '%s' | LINEAS_FILTRO => %s",
+                        buscar,
+                        (constraint != null ? constraint.toString() : "null"),
+                        lineaSeleccionada,
+                        (lineasFiltro == null ? "null" : Arrays.toString(lineasFiltro))
+                );
                 cursor = storage.buscarItemsDescripcionExiste(
                         (constraint != null ? constraint.toString() : "@@@@"),
-                        getLineasParaBusqueda(),
+                        lineasFiltro,
                         bodegas
                 );
 
