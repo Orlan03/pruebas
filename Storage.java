@@ -2834,24 +2834,16 @@ public class Storage extends SQLiteOpenHelper {
                     String nombre = c.getString(c.getColumnIndexOrThrow("nombre"));
                     if (codigo != null) codigo = codigo.trim();
                     if (nombre != null) nombre = nombre.trim();
+                    // El filtro usa "codigo" internamente (para comparar con IVInventario.ivg1),
+                    // pero en UI debemos mostrar SOLO el nombre/descripcion.
                     if (codigo == null || codigo.isEmpty()) continue;
-                    String etiqueta = (nombre == null || nombre.isEmpty()) ? codigo : nombre;
-                    list.add(new CrearItemDialogFragment.LineaItem(codigo, "Linea " + etiqueta));
+                    if (nombre == null || nombre.isEmpty()) continue;
+                    list.add(new CrearItemDialogFragment.LineaItem(codigo, nombre));
                 } while (c.moveToNext());
             }
         } catch (android.database.sqlite.SQLiteException e) {
-            // Fallback: evita crash si por alguna razón la tabla/grupo aún no existe en esa instalación.
-            try {
-                String[] lineas = obtenerLineasDisponibles();
-                for (String l : lineas) {
-                    if (l == null) continue;
-                    l = l.trim();
-                    if (l.isEmpty() || "null".equalsIgnoreCase(l)) continue;
-                    list.add(new CrearItemDialogFragment.LineaItem(l, "Linea " + l));
-                }
-            } catch (Exception ignored) {
-                // sin fallback adicional
-            }
+            // Evita crash si por alguna razón la tabla/grupo aún no existe en esa instalación.
+            // No devolvemos códigos como "nombre" porque el objetivo es mostrar solo nombres.
         } finally {
             if (c != null) c.close();
         }
