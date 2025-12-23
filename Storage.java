@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -56,6 +57,7 @@ import com.ecuasolutions.modelo.Transaccion;
 import com.ecuasolutions.modelo.Usuario;
 import com.ecuasolutions.modelo.Vendedor;
 import com.ecuasolutions.modelo.json.DETALLE;
+import com.ecuasolutions.sicimovile.pedido.dialogs.megalimpio.CrearItemDialogFragment;
 
 public class Storage extends SQLiteOpenHelper {
 
@@ -2709,51 +2711,130 @@ public class Storage extends SQLiteOpenHelper {
      * @return item de coincidencia
      * @throws SQLException en caso de algun error en la busqueda con el select
      */
-    public Cursor buscarItemsDescripcionExiste(String text, String[] lineas, String[] bodegas ) throws SQLException {
+    public Cursor buscarItemsDescripcionExiste(String text, String[] lineas, String[] bodegas) throws SQLException {
         db = this.getReadableDatabase();
-        String querySimple = "";
-            querySimple = "SELECT pro." + IVInventario.FIELD_ID + ","
-                    + "pro." + IVInventario.FIELD_identificador + ","
-                    + "pro." + IVInventario.FIELD_descripcion + ","
-                    + "pro." + IVInventario.FIELD_cod_item + ","
-                    + "pro." + IVInventario.FIELD_cod_alterno + ","
-                    + "pro." + IVInventario.FIELD_precio1 + ","
-                    + "pro." + IVInventario.FIELD_precio2 + ","
-                    + "pro." + IVInventario.FIELD_precio3 + ","
-                    + "pro." + IVInventario.FIELD_precio4 + ","
-                    + "pro." + IVInventario.FIELD_precio5 + ","
-                    + "pro." + IVInventario.FIELD_precio6 + ","
-                    + "pro." + IVInventario.FIELD_observacion1 + ","
-                    + "pro." + IVInventario.FIELD_observacion2 + ","
-                    + "pro." + IVInventario.FIELD_precio7 + ","
-                    + "pro." + IVInventario.FIELD_cod_moneda + ","
-                    + "pro." + IVInventario.FIELD_porc_iva + ","
-                    + "pro." + IVInventario.FIELD_descontinuado + "," // agregado
-                    + "pro." + IVInventario.FIELD_bloqueo_transferencia + "," // agregado
-                    + "pro." + IVInventario.FIELD_fechagrabado + ","
-                    + "IFNULL((SELECT sum(" + Existencia.FIELD_existencia + ")"
-                    + " FROM " + Existencia.TABLE_NAME + "," + Bodega.TABLE_NAME
-                    + " WHERE " + Existencia.FIELD_bodega_id + "=" + Bodega.FIELD_idbodega
-                    + " AND " + Existencia.FIELD_inventario_id + " = pro." + IVInventario.FIELD_identificador;
-            String str_bodegas = TextUtils.join(",", bodegas);
-            querySimple += " AND " + Bodega.FIELD_idbodega + " in ( '" + str_bodegas + "')";
-            querySimple += "), 0) as Existencia,"
-                    + "pro." + IVInventario.FIELD_band_iva + ","
-                    + "pro." + IVInventario.FIELD_presentacion
-                    + " FROM " + IVInventario.TABLE_NAME + " pro"
-                    + " WHERE ((pro." + IVInventario.FIELD_descripcion + " like '%" + text + "%') " +
-                    "OR (pro." + IVInventario.FIELD_cod_item + " like '%" + text + "%') " +
-                    "OR (pro." + IVInventario.FIELD_cod_alterno + " like '%" + text + "%'))";
-            querySimple += " AND  pro." + IVInventario.FIELD_estado + " = 1";
-            querySimple += " ORDER BY pro." + IVInventario.FIELD_descripcion;
 
-        System.out.println("Query Items Descripcion pedido mejorado: " + querySimple);
+        String querySimple = "SELECT pro." + IVInventario.FIELD_ID + ","
+                + "pro." + IVInventario.FIELD_identificador + ","
+                + "pro." + IVInventario.FIELD_descripcion + ","
+                + "pro." + IVInventario.FIELD_cod_item + ","
+                + "pro." + IVInventario.FIELD_cod_alterno + ","
+                + "pro." + IVInventario.FIELD_precio1 + ","
+                + "pro." + IVInventario.FIELD_precio2 + ","
+                + "pro." + IVInventario.FIELD_precio3 + ","
+                + "pro." + IVInventario.FIELD_precio4 + ","
+                + "pro." + IVInventario.FIELD_precio5 + ","
+                + "pro." + IVInventario.FIELD_precio6 + ","
+                + "pro." + IVInventario.FIELD_observacion1 + ","
+                + "pro." + IVInventario.FIELD_observacion2 + ","
+                + "pro." + IVInventario.FIELD_precio7 + ","
+                + "pro." + IVInventario.FIELD_cod_moneda + ","
+                + "pro." + IVInventario.FIELD_porc_iva + ","
+                + "pro." + IVInventario.FIELD_descontinuado + ","
+                + "pro." + IVInventario.FIELD_bloqueo_transferencia + ","
+                + "pro." + IVInventario.FIELD_fechagrabado + ","
+                + "IFNULL((SELECT sum(" + Existencia.FIELD_existencia + ")"
+                + " FROM " + Existencia.TABLE_NAME + "," + Bodega.TABLE_NAME
+                + " WHERE " + Existencia.FIELD_bodega_id + "=" + Bodega.FIELD_idbodega
+                + " AND " + Existencia.FIELD_inventario_id + " = pro." + IVInventario.FIELD_identificador;
+
+        String str_bodegas = TextUtils.join(",", bodegas);
+        querySimple += " AND " + Bodega.FIELD_idbodega + " in ( '" + str_bodegas + "')";
+        querySimple += "), 0) as Existencia,"
+                + "pro." + IVInventario.FIELD_band_iva + ","
+                + "pro." + IVInventario.FIELD_presentacion
+                + " FROM " + IVInventario.TABLE_NAME + " pro"
+                + " WHERE ((pro." + IVInventario.FIELD_descripcion + " like '%" + text + "%') " +
+                "OR (pro." + IVInventario.FIELD_cod_item + " like '%" + text + "%') " +
+                "OR (pro." + IVInventario.FIELD_cod_alterno + " like '%" + text + "%'))";
+
+        querySimple += " AND pro." + IVInventario.FIELD_estado + " = 1";
+
+
+        if (lineas != null && lineas.length > 0) {
+            System.out.println("APLICANDO FILTRO DE LÍNEAS EN SQL: " + Arrays.toString(lineas));
+            querySimple += " AND pro." + IVInventario.FIELD_ivg1 + " IN (";
+            for (int i = 0; i < lineas.length; i++) {
+                querySimple += "'" + lineas[i] + "'";
+                if (i < lineas.length - 1) {
+                    querySimple += ",";
+                }
+            }
+            querySimple += ")";
+        } else {
+            System.out.println("✅ SIN FILTRO DE LÍNEAS (lineas = null o vacío)");
+        }
+
+        querySimple += " ORDER BY pro." + IVInventario.FIELD_descripcion;
+
+        System.out.println(" QUERY FINAL: " + querySimple);
+
         Cursor mCursor = db.rawQuery(querySimple, null);
         if (mCursor != null) {
             mCursor.moveToFirst();
         }
         return mCursor;
     }
+
+    public String[] obtenerLineasDisponibles() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String sql =
+                "SELECT DISTINCT TRIM(pro." + IVInventario.FIELD_ivg1 + ") AS linea " +
+                        "FROM " + IVInventario.TABLE_NAME + " pro " +
+                        "WHERE pro." + IVInventario.FIELD_estado + " = 1 " +
+                        "AND pro." + IVInventario.FIELD_ivg1 + " IS NOT NULL " +
+                        "AND TRIM(pro." + IVInventario.FIELD_ivg1 + ") <> '' " +
+                        "ORDER BY linea";
+
+        Cursor c = null;
+        List<String> list = new ArrayList<>();
+
+        try {
+            c = db.rawQuery(sql, null);
+            if (c.moveToFirst()) {
+                do {
+                    String l = c.getString(c.getColumnIndexOrThrow("linea"));
+                    if (l != null) {
+                        l = l.trim();
+                        if (!l.isEmpty() && !"null".equalsIgnoreCase(l)) {
+                            list.add(l);
+                        }
+                    }
+                } while (c.moveToNext());
+            }
+        } finally {
+            if (c != null) c.close();
+        }
+
+        return list.toArray(new String[0]);
+    }
+    public List<CrearItemDialogFragment.LineaItem> obtenerLineasConNombre() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String sql =
+                "SELECT DISTINCT " +
+                        "TRIM(cat.codigo) AS codigo, " +
+                        "TRIM(cat.nombre) AS nombre " +
+                        "FROM TBL_PRODUCTO pro " +
+                        "INNER JOIN TBL_LINEA cat ON TRIM(pro.emp_ivg1) = TRIM(cat.codigo) " +
+                        "WHERE pro.emp_estado = 1 " +
+                        "ORDER BY nombre";
+
+        Cursor c = db.rawQuery(sql, null);
+
+        List<CrearItemDialogFragment.LineaItem> list = new ArrayList<>();
+        if (c.moveToFirst()) {
+            do {
+                String codigo = c.getString(c.getColumnIndexOrThrow("codigo"));
+                String nombre = c.getString(c.getColumnIndexOrThrow("nombre"));
+                list.add(new CrearItemDialogFragment.LineaItem(codigo, "Linea " + nombre)); // 👈 como tu imagen
+            } while (c.moveToNext());
+        }
+        c.close();
+        return list;
+    }
+
 
 
     /**
