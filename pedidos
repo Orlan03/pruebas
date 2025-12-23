@@ -668,10 +668,25 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
         return filteredModelList;
     }
     private String[] getLineasParaBusqueda() {
-        if (lineaSeleccionada == null || lineaSeleccionada.trim().isEmpty()) {
-            return (lineas != null) ? lineas : new String[0];
+        // Si el usuario escogió una línea específica, filtramos solo por esa.
+        if (lineaSeleccionada != null && !lineaSeleccionada.trim().isEmpty()) {
+            return new String[]{lineaSeleccionada.trim()};
         }
-        return new String[]{ lineaSeleccionada };
+
+        // "Todas": si no hay lista de líneas disponible, NO aplicar filtro de líneas.
+        if (lineas == null || lineas.length == 0) {
+            return null;
+        }
+
+        // Limpiar líneas inválidas (null, "", "null") para evitar consultas tipo IN ().
+        List<String> cleaned = new ArrayList<>();
+        for (String l : lineas) {
+            if (l == null) continue;
+            String t = l.trim();
+            if (t.isEmpty() || "null".equalsIgnoreCase(t)) continue;
+            cleaned.add(t);
+        }
+        return cleaned.isEmpty() ? null : cleaned.toArray(new String[0]);
     }
 
     /**********************************************************
@@ -691,9 +706,14 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
             Cursor cursor = null;
             try {
                 buscar = autoCompleteItem.getText().toString();
+                String[] lineasFiltro = getLineasParaBusqueda();
+                // Si la app no logró cargar líneas, evitamos pasar array vacío (suele dejar la consulta sin resultados).
+                if (lineasFiltro != null && lineasFiltro.length == 0) {
+                    lineasFiltro = null;
+                }
                 cursor = storage.buscarItemsDescripcionExiste(
                         (constraint != null ? constraint.toString() : "@@@@"),
-                        getLineasParaBusqueda(),
+                        lineasFiltro,
                         bodegas
                 );
 
