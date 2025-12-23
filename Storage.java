@@ -2812,26 +2812,49 @@ public class Storage extends SQLiteOpenHelper {
     public List<CrearItemDialogFragment.LineaItem> obtenerLineasConNombre() {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String sql =
-                "SELECT DISTINCT " +
-                        "TRIM(cat.codigo) AS codigo, " +
-                        "TRIM(cat.nombre) AS nombre " +
-                        "FROM TBL_PRODUCTO pro " +
-                        "INNER JOIN TBL_LINEA cat ON TRIM(pro.emp_ivg1) = TRIM(cat.codigo) " +
-                        "WHERE pro.emp_estado = 1 " +
-                        "ORDER BY nombre";
-
-        Cursor c = db.rawQuery(sql, null);
-
         List<CrearItemDialogFragment.LineaItem> list = new ArrayList<>();
-        if (c.moveToFirst()) {
-            do {
-                String codigo = c.getString(c.getColumnIndexOrThrow("codigo"));
-                String nombre = c.getString(c.getColumnIndexOrThrow("nombre"));
-                list.add(new CrearItemDialogFragment.LineaItem(codigo, "Linea " + nombre)); // 👈 como tu imagen
-            } while (c.moveToNext());
+        Cursor c = null;
+        try {
+            // Nota: en esta app los productos están en IVInventario y las "líneas" en IVGrupo1.
+            // La consulta anterior usaba TBL_PRODUCTO/TBL_LINEA, pero esas tablas no se crean en onCreate().
+            String sql =
+                    "SELECT DISTINCT "
+                            + "TRIM(IFNULL(ivg1." + IVGrupo1.FIELD_idgrupo1 + ",'')) AS codigo, "
+                            + "TRIM(IFNULL(ivg1." + IVGrupo1.FIELD_descripcion + ",'')) AS nombre "
+                            + "FROM " + IVInventario.TABLE_NAME + " ivi "
+                            + "INNER JOIN " + IVGrupo1.TABLE_NAME + " ivg1 ON ivg1." + IVGrupo1.FIELD_idgrupo1 + "=ivi." + IVInventario.FIELD_ivg1 + " "
+                            + "WHERE ivi." + IVInventario.FIELD_estado + " = 1 "
+                            + "AND TRIM(IFNULL(ivg1." + IVGrupo1.FIELD_idgrupo1 + ",'')) <> '' "
+                            + "ORDER BY nombre";
+
+            c = db.rawQuery(sql, null);
+            if (c.moveToFirst()) {
+                do {
+                    String codigo = c.getString(c.getColumnIndexOrThrow("codigo"));
+                    String nombre = c.getString(c.getColumnIndexOrThrow("nombre"));
+                    if (codigo != null) codigo = codigo.trim();
+                    if (nombre != null) nombre = nombre.trim();
+                    if (codigo == null || codigo.isEmpty()) continue;
+                    String etiqueta = (nombre == null || nombre.isEmpty()) ? codigo : nombre;
+                    list.add(new CrearItemDialogFragment.LineaItem(codigo, "Linea " + etiqueta));
+                } while (c.moveToNext());
+            }
+        } catch (android.database.sqlite.SQLiteException e) {
+            // Fallback: evita crash si por alguna razón la tabla/grupo aún no existe en esa instalación.
+            try {
+                String[] lineas = obtenerLineasDisponibles();
+                for (String l : lineas) {
+                    if (l == null) continue;
+                    l = l.trim();
+                    if (l.isEmpty() || "null".equalsIgnoreCase(l)) continue;
+                    list.add(new CrearItemDialogFragment.LineaItem(l, "Linea " + l));
+                }
+            } catch (Exception ignored) {
+                // sin fallback adicional
+            }
+        } finally {
+            if (c != null) c.close();
         }
-        c.close();
         return list;
     }
 
