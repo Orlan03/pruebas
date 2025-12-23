@@ -31,12 +31,14 @@
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                card_view:cardCornerRadius="12dp">
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                card_view:cardCornerRadius="16dp"
+                card_view:cardElevation="6dp"
+                card_view:cardUseCompatPadding="true">
                 <RelativeLayout
-                    android:padding="8dp"
+                    android:padding="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -44,23 +46,25 @@
                     <TableLayout
                         android:layout_below="@+id/formItemTxt3"
                         android:layout_width="match_parent"
-                        android:dividerPadding="5dp"
+                        android:dividerPadding="8dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="5dp"
+                            android:padding="12dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:background="@drawable/line"
-                            android:textSize="15dp"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
                             android:layout_gravity="center_vertical"
                             android:layout_alignTop="@+id/thumbnail"
                             android:layout_toRightOf="@+id/thumbnail"
                             android:text="Rango de Busqueda"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:layout_marginBottom="5dp"/>
+                            android:layout_marginBottom="8dp"
+                            android:elevation="2dp"/>
                         <TableRow
                             android:layout_width="match_parent"
                             android:layout_height="40dp">
@@ -126,13 +130,15 @@
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                card_view:cardCornerRadius="12dp">
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                card_view:cardCornerRadius="16dp"
+                card_view:cardElevation="6dp"
+                card_view:cardUseCompatPadding="true">
                 <RelativeLayout
                     android:id="@+id/contenedorItems"
-                    android:padding="8dp"
+                    android:padding="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -149,16 +155,18 @@
                             android:id="@+id/formItemTxt4"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="5dp"
+                            android:padding="12dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:background="@drawable/line"
-                            android:textSize="15dp"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
                             android:layout_gravity="center_vertical"
                             android:layout_alignTop="@+id/thumbnail"
                             android:layout_toRightOf="@+id/thumbnail"
                             android:text="Informacion del Cliente"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:layout_marginBottom="5dp"/>
+                            android:layout_marginBottom="8dp"
+                            android:elevation="2dp"/>
                         <TableRow
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -240,11 +248,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                card_view:cardCornerRadius="12dp">
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                card_view:cardCornerRadius="16dp"
+                card_view:cardElevation="6dp"
+                card_view:cardUseCompatPadding="true">
                 <RelativeLayout
-                    android:padding="8dp"
+                    android:padding="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -261,16 +271,18 @@
                             android:id="@+id/formItemTxt7"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="5dp"
+                            android:padding="12dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:background="@drawable/line"
-                            android:textSize="15dp"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
                             android:layout_gravity="center_vertical"
                             android:layout_alignTop="@+id/thumbnail"
                             android:layout_toRightOf="@+id/thumbnail"
                             android:text="Listado de Compras"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:layout_marginBottom="5dp"/>
+                            android:layout_marginBottom="8dp"
+                            android:elevation="2dp"/>
                     </TableLayout>
                     <!--Tabla de items a vender-->
                     <LinearLayout

@@ -18,9 +18,12 @@
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="12dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardElevation="6dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -32,22 +35,24 @@
                     android:layout_gravity="center_vertical"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:background="@drawable/line"
-                    android:padding="5dp"
+                    android:padding="10dp"
                     android:text="Razon Social"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/textColorSecondary"
-                    android:textSize="15dp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:elevation="2dp" />
                 <TextView
                     android:id="@+id/formClienteTxt2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="8dp"
                     android:layout_below="@id/formClienteTxt1"
                     android:textAppearance="?android:textAppearanceLarge"
                     android:textColor="@color/textColorSecondary"
-                    android:layout_marginTop="1dip"
-                    android:textSize="14dp"
+                    android:layout_marginTop="4dp"
+                    android:textSize="15sp"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:text="Sin definir" />
 
