@@ -6,35 +6,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dividerColor"
+    android:fillViewport="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:paddingTop="12dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
         <androidx.cardview.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            card_view:cardCornerRadius="12dp">
+            android:layout_marginBottom="12dp"
+            card_view:cardUseCompatPadding="true"
+            card_view:cardElevation="4dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardBackgroundColor="@android:color/white">
             <RelativeLayout
-                android:padding="12dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView  android:id="@+id/tittleConfTrans"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="@drawable/line"
-                    android:textSize="15dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
@@ -154,12 +163,13 @@
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            card_view:cardCornerRadius="12dp">
+            android:layout_marginBottom="12dp"
+            card_view:cardUseCompatPadding="true"
+            card_view:cardElevation="4dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardBackgroundColor="@android:color/white">
             <RelativeLayout
-                android:padding="12dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -167,10 +177,15 @@
                     android:id="@+id/formItemTxt3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="@drawable/line"
-                    android:textSize="15dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
@@ -183,6 +198,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/formItemTxt3"
+                    android:padding="8dp"
+                    android:background="@android:color/transparent"
                     android:src="@drawable/ic_sync_black_24dp"/>
 
                 <TableLayout
@@ -410,23 +427,29 @@
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            card_view:cardCornerRadius="12dp"
+            android:layout_marginBottom="12dp"
+            card_view:cardUseCompatPadding="true"
+            card_view:cardElevation="4dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardBackgroundColor="@android:color/white"
             android:visibility="gone">
             <RelativeLayout
-                android:padding="12dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView  android:id="@+id/formItemResumenCartera"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="@drawable/line"
-                    android:textSize="15dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
@@ -528,13 +551,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/contenedorAdicionales"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            card_view:cardCornerRadius="12dp"
+            android:layout_marginBottom="12dp"
+            card_view:cardUseCompatPadding="true"
+            card_view:cardElevation="4dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardBackgroundColor="@android:color/white"
             android:visibility="gone">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -542,10 +566,15 @@
                     android:id="@+id/formItemTxt23"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="@drawable/line"
-                    android:textSize="15dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
@@ -706,13 +735,14 @@
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            card_view:cardCornerRadius="12dp"
+            android:layout_marginBottom="12dp"
+            card_view:cardUseCompatPadding="true"
+            card_view:cardElevation="4dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardBackgroundColor="@android:color/white"
             android:visibility="gone">
             <RelativeLayout
-                android:padding="12dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -720,10 +750,15 @@
                     android:id="@+id/formItemTxt231"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="@drawable/line"
-                    android:textSize="15dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
@@ -830,22 +865,28 @@
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            card_view:cardCornerRadius="12dp">
+            android:layout_marginBottom="12dp"
+            card_view:cardUseCompatPadding="true"
+            card_view:cardElevation="4dp"
+            card_view:cardCornerRadius="16dp"
+            card_view:cardBackgroundColor="@android:color/white">
             <RelativeLayout
-                android:padding="12dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="5dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:background="@drawable/line"
-                    android:textSize="15dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif-medium"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
@@ -857,10 +898,11 @@
                     android:id="@+id/controles"
                     android:layout_below="@+id/formItemTxt4"
                     android:orientation="horizontal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
+                    android:gravity="end"
+                    android:paddingBottom="8dp"
+                    android:paddingTop="8dp"
                     android:layout_weight="1">
                     <TableLayout
                         android:layout_width="wrap_content"
@@ -874,12 +916,15 @@
                                 android:id="@+id/agregar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                android:minHeight="44dp"
                                 android:text="Agregar"/>
 
                             <Button
                                 android:id="@+id/guardar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:minHeight="44dp"
                                 android:text="Guardar"/>
                         </TableRow>
                         <TableRow android:layout_width="match_parent"
@@ -888,12 +933,15 @@
                                 android:id="@+id/editar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginRight="8dp"
+                                android:minHeight="44dp"
                                 android:textOn="Editando"
                                 android:textOff="Editar"/>
                             <ToggleButton
                                 android:id="@+id/eliminar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:minHeight="44dp"
                                 android:textOn="Eliminando"
                                 android:textOff="Eliminar"/>
                         </TableRow>
@@ -1001,7 +1049,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:paddingTop="8dp">
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="fill_parent"
@@ -1013,7 +1062,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="SUBTOTAL CON IVA: "
-                                android:textSize="14dp" />
+                                android:textColor="@color/textColorSecondary"
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/subtotal"
@@ -1022,7 +1072,8 @@
                                 android:gravity="right|center"
                                 android:text=" 0.00"
                                 android:textColor="@color/successfull"
-                                android:textSize="16dp" />
+                                android:textStyle="bold"
+                                android:textSize="16sp" />
                         </LinearLayout>
                         <LinearLayout
                             android:orientation="horizontal"
@@ -1035,7 +1086,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="SUBTOTAL SIN IVA: "
-                                android:textSize="14dp" />
+                                android:textColor="@color/textColorSecondary"
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/subtotal_0"
@@ -1044,7 +1096,8 @@
                                 android:gravity="right|center"
                                 android:text=" 0.00"
                                 android:textColor="@color/successfull"
-                                android:textSize="16dp" />
+                                android:textStyle="bold"
+                                android:textSize="16sp" />
                         </LinearLayout>
                         <LinearLayout
                             android:orientation="horizontal"
@@ -1057,7 +1110,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="SUBTOTAL: "
-                                android:textSize="14dp" />
+                                android:textColor="@color/textColorSecondary"
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/subtotal_total"
@@ -1066,7 +1120,8 @@
                                 android:gravity="right|center"
                                 android:text=" 0.00"
                                 android:textColor="@color/successfull"
-                                android:textSize="16dp" />
+                                android:textStyle="bold"
+                                android:textSize="16sp" />
                         </LinearLayout>
                         <LinearLayout
                             android:orientation="horizontal"
@@ -1078,7 +1133,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="IVA: "
-                                android:textSize="14dp" />
+                                android:textColor="@color/textColorSecondary"
+                                android:textSize="14sp" />
 
                             <TextView
                                 android:id="@+id/iva"
@@ -1087,7 +1143,8 @@
                                 android:gravity="right|center"
                                 android:text=" 0.00"
                                 android:textColor="@color/successfull"
-                                android:textSize="16dp" />
+                                android:textStyle="bold"
+                                android:textSize="16sp" />
                         </LinearLayout>
                         <!--suma total de la transaccion-->
                         <LinearLayout
@@ -1102,7 +1159,8 @@
                                 android:layout_height="wrap_content"
                                 android:text="TOTAL: "
                                 android:textStyle="bold"
-                                android:textSize="20dp" />
+                                android:textColor="@color/textColorPrimary"
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:id="@+id/total"
@@ -1112,7 +1170,7 @@
                                 android:text=" 0.00"
                                 android:textStyle="bold"
                                 android:textColor="@color/successfull"
-                                android:textSize="20dp" />
+                                android:textSize="20sp" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
