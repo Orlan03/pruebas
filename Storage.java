@@ -2745,6 +2745,31 @@ public class Storage extends SQLiteOpenHelper {
                     "OR (pro." + IVInventario.FIELD_cod_item + " like '%" + text + "%') " +
                     "OR (pro." + IVInventario.FIELD_cod_alterno + " like '%" + text + "%'))";
             querySimple += " AND  pro." + IVInventario.FIELD_estado + " = 1";
+            // Aplicar filtro por línea (grupo) cuando corresponde.
+            // Sin esto, siempre devuelve "todas" las líneas.
+            if (lineas != null && lineas.length > 0) {
+                StringBuilder lineaWhere = new StringBuilder();
+                for (String linea : lineas) {
+                    if (linea == null) continue;
+                    String l = linea.trim();
+                    if (l.isEmpty() || "null".equalsIgnoreCase(l)) continue;
+                    if (lineaWhere.length() > 0) lineaWhere.append(" OR ");
+                    // "Línea" puede mapear a ivg1 o ivg2 según configuración/cliente.
+                    // Para evitar que el filtro no aplique, se filtra por ambos campos.
+                    lineaWhere.append("((pro.")
+                            .append(IVInventario.FIELD_ivg2)
+                            .append(" in ('")
+                            .append(l)
+                            .append("')) OR (pro.")
+                            .append(IVInventario.FIELD_ivg1)
+                            .append(" in ('")
+                            .append(l)
+                            .append("')))");
+                }
+                if (lineaWhere.length() > 0) {
+                    querySimple += " AND (" + lineaWhere + ")";
+                }
+            }
             querySimple += " ORDER BY pro." + IVInventario.FIELD_descripcion;
 
         System.out.println("Query Items Descripcion pedido mejorado: " + querySimple);
@@ -2820,6 +2845,28 @@ public class Storage extends SQLiteOpenHelper {
                     "OR (pro." + IVInventario.FIELD_cod_item + " like '%" + text + "%' and pro." + IVInventario.FIELD_cod_item + " like '%" + text2 + "%') " +
                     "OR (pro." + IVInventario.FIELD_cod_alterno + " like '%" + text + "%' and pro." + IVInventario.FIELD_cod_alterno + " like '%" + text2 + "%'))";
             queryDoble += " AND  pro." + IVInventario.FIELD_estado + " = 1";
+            // Filtro por línea (ivg2)
+            if (lineas != null && lineas.length > 0) {
+                StringBuilder lineaWhere = new StringBuilder();
+                for (String linea : lineas) {
+                    if (linea == null) continue;
+                    String l = linea.trim();
+                    if (l.isEmpty() || "null".equalsIgnoreCase(l)) continue;
+                    if (lineaWhere.length() > 0) lineaWhere.append(" OR ");
+                    lineaWhere.append("((pro.")
+                            .append(IVInventario.FIELD_ivg2)
+                            .append(" in ('")
+                            .append(l)
+                            .append("')) OR (pro.")
+                            .append(IVInventario.FIELD_ivg1)
+                            .append(" in ('")
+                            .append(l)
+                            .append("')))");
+                }
+                if (lineaWhere.length() > 0) {
+                    queryDoble += " AND (" + lineaWhere + ")";
+                }
+            }
             queryDoble += " ORDER BY pro." + IVInventario.FIELD_descripcion;
             selectQuery = queryDoble;
          } else {
@@ -2856,6 +2903,28 @@ public class Storage extends SQLiteOpenHelper {
                     "OR (pro." + IVInventario.FIELD_cod_item + " like '%" + text + "%') " +
                     "OR (pro." + IVInventario.FIELD_cod_alterno + " like '%" + text + "%'))";
             querySimple += " AND  pro." + IVInventario.FIELD_estado + " = 1";
+            // Filtro por línea (ivg2)
+            if (lineas != null && lineas.length > 0) {
+                StringBuilder lineaWhere = new StringBuilder();
+                for (String linea : lineas) {
+                    if (linea == null) continue;
+                    String l = linea.trim();
+                    if (l.isEmpty() || "null".equalsIgnoreCase(l)) continue;
+                    if (lineaWhere.length() > 0) lineaWhere.append(" OR ");
+                    lineaWhere.append("((pro.")
+                            .append(IVInventario.FIELD_ivg2)
+                            .append(" in ('")
+                            .append(l)
+                            .append("')) OR (pro.")
+                            .append(IVInventario.FIELD_ivg1)
+                            .append(" in ('")
+                            .append(l)
+                            .append("')))");
+                }
+                if (lineaWhere.length() > 0) {
+                    querySimple += " AND (" + lineaWhere + ")";
+                }
+            }
             querySimple += " ORDER BY pro." + IVInventario.FIELD_descripcion;
 
             selectQuery = querySimple;
