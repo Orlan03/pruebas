@@ -193,7 +193,7 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
             Storage helper = new Storage(getContext());
             Cursor cursor = helper.obtenerExistenciaItemBodegaPrincipal(id_item);
             if (cursor.moveToFirst()) {
-               cantidad = cursor.getInt(cursor.getColumnIndex(Existencia.FIELD_existencia));
+                cantidad = cursor.getInt(cursor.getColumnIndex(Existencia.FIELD_existencia));
             }
             cursor.close();
             helper.close();
@@ -220,6 +220,20 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
     }
 
 
+    public static class LineaItem {
+        public final String codigo;
+        public final String nombre;
+
+        public LineaItem(String codigo, String nombre) {
+            this.codigo = codigo;
+            this.nombre = nombre;
+        }
+
+        @Override
+        public String toString() {
+            return nombre;
+        }
+    }
 
 
     @Override
@@ -232,58 +246,38 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
         priceSpinner.setAdapter(adapterPrice);
 
 
-        List<String> listaLineas = new ArrayList<>();
-        listaLineas.add("Todas");
-        if (lineas != null) {
-            for (String l : lineas){
-                if (l != null && !l.trim().isEmpty() && ! "null".equalsIgnoreCase(l.trim())){
-                    listaLineas.add(l.trim());
-                }
-            }
-        }
+        if (lineas == null) lineas = new String[0];
 
-        ArrayAdapter<String> adapterLineas = new ArrayAdapter<>(
+
+
+
+        List<LineaItem> listaLineas = new ArrayList<>();
+        listaLineas.add(new LineaItem(null, "Todas"));
+
+        Storage st = new Storage(getContext());
+
+        List<LineaItem> lineasItems = new ArrayList<>();
+        lineasItems.add(new LineaItem(null, "Todas"));
+        lineasItems.addAll(st.obtenerLineasConNombre());
+
+        st.close();
+
+        ArrayAdapter<LineaItem> adapterLineas = new ArrayAdapter<>(
                 getContext(),
                 android.R.layout.simple_spinner_item,
-                listaLineas
+                lineasItems
         );
         adapterLineas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLinea.setAdapter(adapterLineas);
 
-
         spinnerLinea.setSelection(0);
         lineaSeleccionada = null;
 
-        spinnerLinea.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-                String selected = (String) parent.getItemAtPosition(position);
 
-                if ("Todas".equalsIgnoreCase(selected)) {
-                    lineaSeleccionada = null;
-                } else {
-                    lineaSeleccionada = selected;
-                }
+        System.out.println(" LINEAS SPINNER FINAL => " + listaLineas);
 
-                productCreated = new ProductItemCart();
 
-                autoCompleteItem.setText("");
-                unidad.setText("");
-                presentacion.setText("");
-                precioFinal.setText("");
-                precioFinalIva.setText("");
-                descuento.setText("");
-                promocion.setText("");
 
-                adapterPrice.refreshItems(getPreciosDefault());
-                autoCompleteItem.requestFocus();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                lineaSeleccionada = null;
-            }
-        });
 
         Timber.d("LISTA SPINNER => %s,", listaLineas.toString());
         dialogProgress = view.findViewById(R.id.dialog_update_cart_item_progress);
@@ -295,7 +289,7 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
         customToastStockBodega = inflate.inflate(R.layout.info_existencia_producto, (ViewGroup) view.findViewById(R.id.custom_toast_layout_id1));
         autoCompleteItem = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteProducto);
 
-      //  System.out.println("Llego a set text");
+        //  System.out.println("Llego a set text");
         unidad = (EditText) view.findViewById(R.id.unidad);
         presentacion = (EditText) view.findViewById(R.id.presentacion);
 
@@ -324,6 +318,39 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
         descuento = view.findViewById(R.id.descuento);
         precioFinal = view.findViewById(R.id.precio_final);
         precioFinalIva = view.findViewById(R.id.precio_final_iva);
+        spinnerLinea.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+
+                LineaItem item = (LineaItem) parent.getItemAtPosition(position);
+
+                if (item == null || item.codigo == null) {
+                    lineaSeleccionada = null; // Todas
+                } else {
+                    lineaSeleccionada = item.codigo;
+                }
+
+                productCreated = new ProductItemCart();
+
+                autoCompleteItem.setText("");
+                unidad.setText("");
+                presentacion.setText("");
+                precioFinal.setText("");
+                precioFinalIva.setText("");
+                descuento.setText("");
+                promocion.setText("");
+
+                adapterPrice.refreshItems(getPreciosDefault());
+                autoCompleteItem.requestFocus();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                lineaSeleccionada = null;
+            }
+        });
+
+
         // Tipo numérico con decimal (no firmados)
         descuento.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         // Aplica SOLO el filtro (no uses TextWatcher aquí)
@@ -399,8 +426,8 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
                 if (productCreated.getProductId() != null) {
                     int can = 0;
                     if(cantidad.getText().toString().trim().equalsIgnoreCase("")){
-                       cantidad.requestFocus();
-                       cantidad.setError("Campo vacio");// mensaje de error
+                        cantidad.requestFocus();
+                        cantidad.setError("Campo vacio");// mensaje de error
                     } else {
                         can = Integer.parseInt(cantidad.getText().toString());
                     }
@@ -427,34 +454,34 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
                             }
                             System.out.println("precio ???  " +np);
                             System.out.println("***************** ");
-                           // if (productPrice.getPrice() != 0) {
-                                if (descuento.getText().toString().isEmpty()) {
-                                    descuento.setText("0.00");
-                                    addProductInCart(productCreated.getProductId(), Integer.parseInt(cantidad.getText().toString()), Double.parseDouble(descuento.getText().toString()), productPrice.getPrice(), Integer.parseInt(promocion.getText().toString()));
-                                    System.out.println("Price xd: "+productPrice.getPrice()+" existencia "+np);
+                            // if (productPrice.getPrice() != 0) {
+                            if (descuento.getText().toString().isEmpty()) {
+                                descuento.setText("0.00");
+                                addProductInCart(productCreated.getProductId(), Integer.parseInt(cantidad.getText().toString()), Double.parseDouble(descuento.getText().toString()), productPrice.getPrice(), Integer.parseInt(promocion.getText().toString()));
+                                System.out.println("Price xd: "+productPrice.getPrice()+" existencia "+np);
+                            } else {
+                                double desc = Double.parseDouble(descuento.getText().toString());
+                                System.out.println("Descuento xd:  "+ desc);
+                                if (desc >= 0 && desc <= 100) {
+                                    addProductInCart(productCreated.getProductId(), Integer.parseInt(cantidad.getText().toString()), desc, productPrice.getPrice(), Integer.parseInt(promocion.getText().toString()));
                                 } else {
-                                    double desc = Double.parseDouble(descuento.getText().toString());
-                                    System.out.println("Descuento xd:  "+ desc);
-                                    if (desc >= 0 && desc <= 100) {
-                                        addProductInCart(productCreated.getProductId(), Integer.parseInt(cantidad.getText().toString()), desc, productPrice.getPrice(), Integer.parseInt(promocion.getText().toString()));
-                                    } else {
-                                        descuento.requestFocus();
-                                        descuento.setError(getString(R.string.info_field_desc_no_valid));
-                                    }
+                                    descuento.requestFocus();
+                                    descuento.setError(getString(R.string.info_field_desc_no_valid));
                                 }
-                           // } //else {
-                                System.out.println("Llega al else");
-                                Timber.e(new RuntimeException(), "Cannot obtain info about edited cart item.");
-                                MsgUtils.showToast(getActivity(), MsgUtils.TOAST_TYPE_MESSAGE, getString(R.string.Internal_error_reload_cart_please), MsgUtils.ToastLength.SHORT);
-                                // Aquí la CORRECCIÓN con la interfaz
-                                if (buscarListener != null) {
-                                    //buscar = autoCompleteItem.getText().toString();
-                                    System.out.println("item buscar: " + buscar);
-                                    buscarListener.onBuscar(buscar);
-                                }
+                            }
+                            // } //else {
+                            System.out.println("Llega al else");
+                            Timber.e(new RuntimeException(), "Cannot obtain info about edited cart item.");
+                            MsgUtils.showToast(getActivity(), MsgUtils.TOAST_TYPE_MESSAGE, getString(R.string.Internal_error_reload_cart_please), MsgUtils.ToastLength.SHORT);
+                            // Aquí la CORRECCIÓN con la interfaz
+                            if (buscarListener != null) {
+                                //buscar = autoCompleteItem.getText().toString();
+                                System.out.println("item buscar: " + buscar);
+                                buscarListener.onBuscar(buscar);
+                            }
 
-                                dismiss();
-                           // }
+                            dismiss();
+                            // }
                         } else {
                             cantidad.requestFocus();
                             cantidad.setError(getString(R.string.info_field_no_valid));
@@ -668,11 +695,17 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
         return filteredModelList;
     }
     private String[] getLineasParaBusqueda() {
-        if (lineaSeleccionada == null || lineaSeleccionada.trim().isEmpty()) {
-            return (lineas != null) ? lineas : new String[0];
+
+        if (lineaSeleccionada != null && !lineaSeleccionada.trim().isEmpty()) {
+            System.out.println(" FILTRAR POR LÍNEA: " + lineaSeleccionada);
+            return new String[]{ lineaSeleccionada.trim() };
         }
-        return new String[]{ lineaSeleccionada };
+
+        System.out.println(" NO FILTRAR (Todas las líneas)");
+
+        return null;
     }
+
 
     /**********************************************************
      ************************Adaptadores **********************
@@ -690,18 +723,24 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
         public Cursor runQueryOnBackgroundThread(CharSequence constraint) {
             Cursor cursor = null;
             try {
-                buscar = autoCompleteItem.getText().toString();
-                cursor = storage.buscarItemsDescripcionExiste(
-                        (constraint != null ? constraint.toString() : "@@@@"),
-                        getLineasParaBusqueda(),
-                        bodegas
+                String[] lineasFiltro = getLineasParaBusqueda();
+                Timber.d("BUSCAR=%s | LINEA=%s | LINEASFILTRO=%s",
+                        (constraint != null ? constraint.toString() : "null"),
+                        lineaSeleccionada,
+                        (lineasFiltro == null ? "null" : Arrays.toString(lineasFiltro))
                 );
 
+                cursor = storage.buscarItemsDescripcionExiste(
+                        (constraint != null ? constraint.toString() : "@@@@"),
+                        lineasFiltro,
+                        bodegas
+                );
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             return cursor;
         }
+
 
         @Override
         public CharSequence convertToString(Cursor cursor) {
@@ -711,61 +750,63 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
 
 
 
-      /*  public void loadPreferences(){
-            ExtraerConfiguraciones extraerConfiguraciones= new ExtraerConfiguraciones(getActivity());
-            this.orden_bodegas=extraerConfiguraciones.get(getActivity().getString(R.string.key_act_bod),getActivity().getString(R.string.pref_act_bod_default));
-        }
-
-        private void consultarPcKardexCli(String id_item){
-            Storage helper= new Storage(getActivity());
-            Cursor cursor=helper.consultarPCKardexCli(id_item);
-            if(cursor.moveToFirst()){
-                do{
-
-                }while(cursor.moveToNext());
-            }else{
-            }
-            cursor.close();
-            helper.close();
-        } */
-      @Override
-      public void bindView(View view, Context context, Cursor cursor) {
-
-          String cod_item = cursor.getString(cursor.getColumnIndex(IVInventario.FIELD_cod_item));
-          int existencia = obtenerExistenciaDetalle(cod_item);
-
-          TextView textCodigo = view.findViewById(R.id.codigo);
-          TextView textDescripcion = view.findViewById(R.id.descripcion);
-          TextView textExistencia = view.findViewById(R.id.existencia);
-          TextView textPrecio = view.findViewById(R.id.precio_final_1);
-
-          textCodigo.setVisibility(View.GONE);
-
-          String descripcion = cursor.getString(cursor.getColumnIndex(IVInventario.FIELD_descripcion));
-
-          // ⬅ LIMPIAR DESCRIPCIÓN PARA QUITAR EL PRECIO
-          String descripcionLimpia = descripcion;
-          if (descripcion.contains("Precio")) {
-              descripcionLimpia = descripcion.substring(0, descripcion.indexOf("Precio")).trim();
+        /*  public void loadPreferences(){
+              ExtraerConfiguraciones extraerConfiguraciones= new ExtraerConfiguraciones(getActivity());
+              this.orden_bodegas=extraerConfiguraciones.get(getActivity().getString(R.string.key_act_bod),getActivity().getString(R.string.pref_act_bod_default));
           }
 
-          textDescripcion.setText(descripcionLimpia);
+          private void consultarPcKardexCli(String id_item){
+              Storage helper= new Storage(getActivity());
+              Cursor cursor=helper.consultarPCKardexCli(id_item);
+              if(cursor.moveToFirst()){
+                  do{
 
-          textExistencia.setText(String.valueOf(existencia));
-
-          String precioExtraido = "0.00";
-
-          try {
-              if (descripcion.contains("Precio")) {
-                  String afterPrecio = descripcion.substring(descripcion.indexOf("Precio") + 7).trim();
-                  precioExtraido = afterPrecio.split("\\|")[0].trim();
+                  }while(cursor.moveToNext());
+              }else{
               }
-          } catch (Exception e) {
-              precioExtraido = "0.00";
-          }
+              cursor.close();
+              helper.close();
+          } */
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
 
-          textPrecio.setText("$" + precioExtraido);
-      }
+            String idItem = cursor.getString(cursor.getColumnIndexOrThrow(IVInventario.FIELD_identificador));
+            int existencia = obtenerExistenciaDetalle(idItem);
+
+
+
+            TextView textCodigo = view.findViewById(R.id.codigo);
+            TextView textDescripcion = view.findViewById(R.id.descripcion);
+            TextView textExistencia = view.findViewById(R.id.existencia);
+            TextView textPrecio = view.findViewById(R.id.precio_final_1);
+
+            textCodigo.setVisibility(View.GONE);
+
+            String descripcion = cursor.getString(cursor.getColumnIndex(IVInventario.FIELD_descripcion));
+
+            // ⬅ LIMPIAR DESCRIPCIÓN PARA QUITAR EL PRECIO
+            String descripcionLimpia = descripcion;
+            if (descripcion.contains("Precio")) {
+                descripcionLimpia = descripcion.substring(0, descripcion.indexOf("Precio")).trim();
+            }
+
+            textDescripcion.setText(descripcionLimpia);
+
+            textExistencia.setText(String.valueOf(existencia));
+
+            String precioExtraido = "0.00";
+
+            try {
+                if (descripcion.contains("Precio")) {
+                    String afterPrecio = descripcion.substring(descripcion.indexOf("Precio") + 7).trim();
+                    precioExtraido = afterPrecio.split("\\|")[0].trim();
+                }
+            } catch (Exception e) {
+                precioExtraido = "0.00";
+            }
+
+            textPrecio.setText("$" + precioExtraido);
+        }
 
 
         @Override
@@ -784,7 +825,7 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
                 double desc=redondearNumero(obtenerDescuentoItem(idcliente, cursor.getString(cursor.getColumnIndexOrThrow(IVInventario.FIELD_identificador))),"0.00");
                 String iditem = cursor.getString(cursor.getColumnIndexOrThrow(IVInventario.FIELD_identificador));
                 // String uniItem = cursor.getString(cursor.getColumnIndexOrThrow(IVInventario.FIELD_unidad));
-               //  String presentItem = cursor.getString(cursor.getColumnIndexOrThrow(IVInventario.FIELD_presentacion));
+                //  String presentItem = cursor.getString(cursor.getColumnIndexOrThrow(IVInventario.FIELD_presentacion));
                 System.out.println("Escojio el item: ??? "+ iditem);
 
 
@@ -835,7 +876,7 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
      **********************************************************/
     /**
      *
-      * @param cli_id
+     * @param cli_id
      * @param item_id
      * @return
      */
@@ -1032,7 +1073,7 @@ public class CrearItemDialogFragment extends DialogFragment implements View.OnCl
                 item_hijo.setPorc_iva(cursor1.getDouble(cursor1.getColumnIndex(IVInventario.FIELD_porc_iva)));
             }
             cursor1.close();
-                /*cargando arreglos globales*/
+            /*cargando arreglos globales*/
             int veces = (int) (producto_padre.getCantidad() / cantidad_minima);
             int cantidad_total = 0;
             for (int i = 0; i < veces; i++) cantidad_total += cantidad_promo;
