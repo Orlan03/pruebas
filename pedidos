@@ -1,0 +1,1099 @@
+package com.ecuasolutions.sicimovile.pedido.dialogs.megalimpio;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.CursorAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TableRow;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+
+import java.lang.reflect.Array;
+import java.math.RoundingMode;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import com.ecuasolutions.adaptadores.ExistenciaSpinnerAdapter;
+import com.ecuasolutions.adaptadores.ExtraerConfiguraciones;
+import com.ecuasolutions.adaptadores.GeneradorClaves;
+import com.ecuasolutions.adaptadores.PriceSpinnerAdapter;
+import com.ecuasolutions.adaptadores.Validaciones;
+import com.ecuasolutions.dialogs.InfoClienteDialogFragment;
+import com.ecuasolutions.dialogs.InfoItemDetailDialogFragment;
+import com.ecuasolutions.modelo.Contactos;
+import com.ecuasolutions.modelo.vista.Item;
+import com.ecuasolutions.sicimovile.LoginActivity;
+import com.ecuasolutions.sicimovile.MainActivity;
+import com.ecuasolutions.sicimovile.R;
+import com.ecuasolutions.sicimovile.pedido.crear.megalimpio.PedidoMegLimp;
+import com.ecuasolutions.modelo.ProductItemCart;
+import com.ecuasolutions.modelo.Bodega;
+import com.ecuasolutions.modelo.Descuento;
+import com.ecuasolutions.modelo.Existencia;
+import com.ecuasolutions.modelo.IVInventario;
+import com.ecuasolutions.modelo.Promocion;
+import com.ecuasolutions.modelo.product.ProductPrice;
+import com.ecuasolutions.storage.Storage;
+import com.ecuasolutions.utils.MsgUtils;
+import com.ecuasolutions.utils.PercentRangeFilter;
+
+import timber.log.Timber;
+
+/**
+ * Dialog handles update items in the shopping cart.
+ */
+public class CrearItemDialogFragment extends DialogFragment implements View.OnClickListener{
+
+
+    public interface OnBuscarListener {
+        void onBuscar(String buscar);
+    }
+    private OnBuscarListener buscarListener;
+
+    /**
+     * Defined max product quantity.
+     */
+    private static final int PRICE_MAX = 7;
+
+    private String idcliente;
+
+    //private RequestListener requestListener;
+    private View dialogProgress;
+    private View dialogContent;
+    private View customToastStockInsuficiente,customToastStockBodega;
+    private AutoCompleteTextView autoCompleteItem;
+    private EditText cantidad, descuento, unidad, presentacion, promocion, precioFinal, precioFinalIva;
+    private String buscar; // Nueva variable para el valor de búsqueda
+    private String [] lineas, bodegas;
+    private int cantidadpre, numprecio;
+    private String numdecpu, numdecptotal;
+    private String bodegapre, uni, present;
+    private View tilDescuento, tilPromocion;
+    private RadioGroup rgFormaDescuento, rbDescuento, rbPromocion;
+    private ProductItemCart productCreated;
+    private Spinner priceSpinner;
+    private Button verdetalles;
+    private Spinner existenciaSpinner;
+    private boolean precioSeleccionable = true;
+    private Spinner spinnerLinea;
+    private String lineaSeleccionada = null;
+    PriceSpinnerAdapter adapterPrice;
+    ExistenciaSpinnerAdapter adapterExistencia;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof OnBuscarListener) {
+            buscarListener = (OnBuscarListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement OnBuscarListener");
+        }
+    }
+
+    /**
+     * Creates dialog which handles update items in the shopping cart
+     *
+     * @param idcliente, which should be updated.
+     * @return new instance of dialog.
+     */
+    public static CrearItemDialogFragment newInstance(
+            String idcliente,
+            String[] lineas,
+            String[] bodegas,
+            String bodegapre,
+            int cantidadpre,
+            int numprecio,
+            String numdecpu,
+            String numdecptotal,
+            String buscar
+    ) {
+        CrearItemDialogFragment f = new CrearItemDialogFragment();
+
+        Bundle b = new Bundle();
+        b.putString("idcliente", idcliente);
+        b.putStringArray("lineas", lineas);
+        b.putStringArray("bodegas", bodegas);
+        b.putString("bodegapre", bodegapre);
+        b.putInt("cantidadpre", cantidadpre);
+        b.putInt("numprecio", numprecio);
+        b.putString("numdecpu", numdecpu);
+        b.putString("numdecptotal", numdecptotal);
+        b.putString("buscar", buscar);
+        f.setArguments(b);
+
+        return f;
+    }
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth);
+
+        Bundle b = getArguments();
+        if (b != null) {
+            idcliente = b.getString("idcliente");
+            lineas = b.getStringArray("lineas");
+            bodegas = b.getStringArray("bodegas");
+            bodegapre = b.getString("bodegapre");
+            cantidadpre = b.getInt("cantidadpre");
+            numprecio = b.getInt("numprecio");
+            numdecpu = b.getString("numdecpu");
+            numdecptotal = b.getString("numdecptotal");
+            buscar = b.getString("buscar");
+        }
+
+        Timber.d("LINEAS => %s", (lineas == null ? "null" : Arrays.toString(lineas)));
+        Timber.d("LINEAS LEN => %d", (lineas == null ? 0 : lineas.length));
+
+    }
+
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setWindowAnimations(R.style.dialogFragmentAnimation);
+        return dialog;
+    }
+
+    private int obtenerExistenciaDetalle(String id_item){
+        int cantidad = 0;
+        try {
+            Storage helper = new Storage(getContext());
+            Cursor cursor = helper.obtenerExistenciaItemBodegaPrincipal(id_item);
+            if (cursor.moveToFirst()) {
+               cantidad = cursor.getInt(cursor.getColumnIndex(Existencia.FIELD_existencia));
+            }
+            cursor.close();
+            helper.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cantidad;
+    }
+
+    private String obtenerBodega(){
+        String nomBodega = "";
+        try {
+            Storage helper = new Storage(getContext());
+            Cursor cursor = helper.consultarBodega(bodegapre);
+            if (cursor.moveToFirst()) {
+                nomBodega = cursor.getString(cursor.getColumnIndex(Bodega.FIELD_nombre));
+            }
+            cursor.close();
+            helper.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return nomBodega;
+    }
+
+
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Timber.d("%s - OnCreateView", this.getClass().getSimpleName());
+        View view = inflater.inflate(R.layout.dialog_create_cart_item_op_meglimp, container, false);
+        spinnerLinea = view.findViewById(R.id.spinner_linea);
+        adapterPrice = new PriceSpinnerAdapter(getActivity(), getPreciosDefault());
+        priceSpinner = view.findViewById(R.id.dialog_create_cart_item_price_spin);
+        priceSpinner.setAdapter(adapterPrice);
+
+
+        List<String> listaLineas = new ArrayList<>();
+        listaLineas.add("Todas");
+        if (lineas != null) {
+            for (String l : lineas){
+                if (l != null && !l.trim().isEmpty() && ! "null".equalsIgnoreCase(l.trim())){
+                    listaLineas.add(l.trim());
+                }
+            }
+        }
+
+        ArrayAdapter<String> adapterLineas = new ArrayAdapter<>(
+                getContext(),
+                android.R.layout.simple_spinner_item,
+                listaLineas
+        );
+        adapterLineas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLinea.setAdapter(adapterLineas);
+
+
+        spinnerLinea.setSelection(0);
+        lineaSeleccionada = null;
+
+        spinnerLinea.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+                String selected = (String) parent.getItemAtPosition(position);
+
+                if ("Todas".equalsIgnoreCase(selected)) {
+                    lineaSeleccionada = null;
+                } else {
+                    lineaSeleccionada = selected;
+                }
+
+                productCreated = new ProductItemCart();
+
+                autoCompleteItem.setText("");
+                unidad.setText("");
+                presentacion.setText("");
+                precioFinal.setText("");
+                precioFinalIva.setText("");
+                descuento.setText("");
+                promocion.setText("");
+
+                adapterPrice.refreshItems(getPreciosDefault());
+                autoCompleteItem.requestFocus();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                lineaSeleccionada = null;
+            }
+        });
+
+        Timber.d("LISTA SPINNER => %s,", listaLineas.toString());
+        dialogProgress = view.findViewById(R.id.dialog_update_cart_item_progress);
+        dialogContent = view.findViewById(R.id.dialog_update_cart_item_content);
+        verdetalles = view.findViewById(R.id.verdetalles);
+        this.verdetalles.setOnClickListener(this);
+        LayoutInflater inflate = getActivity().getLayoutInflater();
+        customToastStockInsuficiente = inflate.inflate(R.layout.info_stock_insuficiente, (ViewGroup) view.findViewById(R.id.custom_toast_layout_id1));
+        customToastStockBodega = inflate.inflate(R.layout.info_existencia_producto, (ViewGroup) view.findViewById(R.id.custom_toast_layout_id1));
+        autoCompleteItem = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteProducto);
+
+      //  System.out.println("Llego a set text");
+        unidad = (EditText) view.findViewById(R.id.unidad);
+        presentacion = (EditText) view.findViewById(R.id.presentacion);
+
+        cantidad = (EditText) view.findViewById(R.id.cantidad);
+        descuento = (EditText) view.findViewById(R.id.descuento);
+        promocion = (EditText) view.findViewById(R.id.promocion);
+        if(cantidadpre>0)cantidad.setText(String.valueOf(cantidadpre));
+        //promocion.setText(String.valueOf(0));
+        AutoCompleteProductoSelected adapter = this.new AutoCompleteProductoSelected(getContext());
+        autoCompleteItem.setAdapter(adapter);
+        autoCompleteItem.setOnItemClickListener(adapter);
+        // --- CORRECCIÓN AQUÍ ---
+        // Establecer el texto y luego forzar el filtro
+        if (buscar != null && !buscar.isEmpty()) {
+            autoCompleteItem.setText(buscar);
+            autoCompleteItem.setSelection(autoCompleteItem.getText().length());
+            // Forzar el filtrado para mostrar las sugerencias
+            autoCompleteItem.post(new Runnable() {
+                @Override
+                public void run() {
+                    autoCompleteItem.showDropDown();
+                }
+            });
+        }
+        // --- FIN DE LA CORRECCIÓN ---
+        descuento = view.findViewById(R.id.descuento);
+        precioFinal = view.findViewById(R.id.precio_final);
+        precioFinalIva = view.findViewById(R.id.precio_final_iva);
+        // Tipo numérico con decimal (no firmados)
+        descuento.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        // Aplica SOLO el filtro (no uses TextWatcher aquí)
+        descuento.setFilters(new InputFilter[]{new PercentRangeFilter(0, 100)});
+        // Listener para el campo de descuento
+        descuento.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String descuentoStr = s.toString();
+                if (descuentoStr.isEmpty() || Double.parseDouble(descuentoStr) < 0 || Double.parseDouble(descuentoStr) > 100) {
+                    //precioFinal.setText(String.valueOf(productCreated.getPu()));
+                    ProductPrice selectedPrice = (ProductPrice) priceSpinner.getSelectedItem();
+                    double priceValue = selectedPrice.getPrice();
+                    System.out.println(priceValue);
+                    double nuevoPrecio = priceValue;
+                    double precioRedondeado = redondearNumero(nuevoPrecio, numdecpu);
+                    double porc_iva = productCreated.getPorc_iva();
+                    double precioreal_iva = redondearNumero((nuevoPrecio+(porc_iva*nuevoPrecio)),numdecpu);
+                    precioFinal.setText(String.valueOf(precioRedondeado));
+                    precioFinalIva.setText(String.valueOf(precioreal_iva));
+                } else {
+                    double porcDescuento = Double.parseDouble(descuentoStr);
+                    System.out.println("PRECIO ORIGINL");
+                    ProductPrice selectedPrice = (ProductPrice) priceSpinner.getSelectedItem();
+                    double priceValue = selectedPrice.getPrice();
+                    System.out.println(priceValue);
+                    double nuevoPrecio = priceValue * (1 - (porcDescuento / 100.0));
+                    double precioRedondeado = redondearNumero(nuevoPrecio, numdecpu);
+                    double porc_iva = productCreated.getPorc_iva();
+                    double precioreal_iva = redondearNumero((nuevoPrecio+(porc_iva*nuevoPrecio)),numdecpu);
+                    precioFinal.setText(String.valueOf(precioRedondeado));
+                    precioFinalIva.setText(String.valueOf(precioreal_iva));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+        View btnSave = view.findViewById(R.id.dialog_update_cart_item_save_btn);
+        verdetalles.setOnClickListener(new View.OnClickListener() {
+            private String[] conf_bodegas;
+
+            @Override
+            public void onClick(View v) {
+                //System.out.println("Desea ver los detalles");
+                ExtraerConfiguraciones ext = new ExtraerConfiguraciones(getContext());
+                this.conf_bodegas = ext.get(getString(R.string.key_act_bod), getString(R.string.pref_act_bod_default)).split(",");
+                System.out.println("guardar trans");
+
+                if (productCreated.getProductId() != null){
+                    String des = productCreated.getProductId();
+
+                    ProductItemCart item = productCreated;
+                    InfoItemDialogFragment detailDialog = InfoItemDialogFragment.newInstance(item, conf_bodegas);
+                    if (detailDialog != null) {
+                        FragmentManager fragmentManager = getFragmentManager();
+                        detailDialog.show(fragmentManager, InfoItemDialogFragment.class.getSimpleName());
+                    }
+                } else {
+                    alertDialogSelectItem();
+                }
+
+            }
+        });
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (productCreated.getProductId() != null) {
+                    int can = 0;
+                    if(cantidad.getText().toString().trim().equalsIgnoreCase("")){
+                       cantidad.requestFocus();
+                       cantidad.setError("Campo vacio");// mensaje de error
+                    } else {
+                        can = Integer.parseInt(cantidad.getText().toString());
+                    }
+                    // int can = Integer.parseInt(cantidad.getText().toString()); /// error de la cantidad en blanco
+                    if(promocion.getText().toString().trim().equalsIgnoreCase("")){
+                        cantidad.setError("Campo vacio promocion");// mensaje de error
+                        promocion.setText("0");
+                    }
+                    System.out.println("Producto cargado "+ productCreated.getProductId());
+                    System.out.println("promocion cargado "+ productCreated.getPromocion());
+                    int existenciaP = obtenerExistenciaDetalle(productCreated.getProductId());
+                    if (can <= existenciaP) {
+                        if (!cantidad.getText().toString().isEmpty() && Integer.parseInt(cantidad.getText().toString()) > 0) {
+                            System.out.println("Precios del itemm "+ priceSpinner.getSelectedItem());
+                            ProductPrice productPrice = (ProductPrice) priceSpinner.getSelectedItem(); // lega vacio verificar
+                            Timber.d("Product Created: %s", productCreated);
+                            System.out.println("precio ???  ");
+                            System.out.println("############################### ");
+                            int np = 0;
+                            if (precioSeleccionable) {
+                                np = priceSpinner.getSelectedItemPosition() + 1;
+                            } else {
+                                np = numprecio;
+                            }
+                            System.out.println("precio ???  " +np);
+                            System.out.println("***************** ");
+                           // if (productPrice.getPrice() != 0) {
+                                if (descuento.getText().toString().isEmpty()) {
+                                    descuento.setText("0.00");
+                                    addProductInCart(productCreated.getProductId(), Integer.parseInt(cantidad.getText().toString()), Double.parseDouble(descuento.getText().toString()), productPrice.getPrice(), Integer.parseInt(promocion.getText().toString()));
+                                    System.out.println("Price xd: "+productPrice.getPrice()+" existencia "+np);
+                                } else {
+                                    double desc = Double.parseDouble(descuento.getText().toString());
+                                    System.out.println("Descuento xd:  "+ desc);
+                                    if (desc >= 0 && desc <= 100) {
+                                        addProductInCart(productCreated.getProductId(), Integer.parseInt(cantidad.getText().toString()), desc, productPrice.getPrice(), Integer.parseInt(promocion.getText().toString()));
+                                    } else {
+                                        descuento.requestFocus();
+                                        descuento.setError(getString(R.string.info_field_desc_no_valid));
+                                    }
+                                }
+                           // } //else {
+                                System.out.println("Llega al else");
+                                Timber.e(new RuntimeException(), "Cannot obtain info about edited cart item.");
+                                MsgUtils.showToast(getActivity(), MsgUtils.TOAST_TYPE_MESSAGE, getString(R.string.Internal_error_reload_cart_please), MsgUtils.ToastLength.SHORT);
+                                // Aquí la CORRECCIÓN con la interfaz
+                                if (buscarListener != null) {
+                                    //buscar = autoCompleteItem.getText().toString();
+                                    System.out.println("item buscar: " + buscar);
+                                    buscarListener.onBuscar(buscar);
+                                }
+
+                                dismiss();
+                           // }
+                        } else {
+                            cantidad.requestFocus();
+                            cantidad.setError(getString(R.string.info_field_no_valid));
+                        }
+                    } else {
+                        alertaStockInsuficiente();
+                        System.out.println("PRECIO ORIGINL");
+                        ProductPrice selectedPrice = (ProductPrice) priceSpinner.getSelectedItem();
+                        double priceValue = selectedPrice.getPrice();
+                        double precioRedondeado = redondearNumero(priceValue, numdecpu);
+                        double porc_iva = productCreated.getPorc_iva();
+                        double precioreal_iva = redondearNumero((priceValue+(porc_iva*priceValue)),numdecpu);
+                        precioFinal.setText(String.valueOf(precioRedondeado));
+                        precioFinalIva.setText(String.valueOf(precioreal_iva));
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        mensajeContinuarSinStock();
+
+                    }
+
+
+                } else {
+                    Timber.e(new NullPointerException(), "Null spinners in editing item in cart");
+                    MsgUtils.showToast(getActivity(), MsgUtils.TOAST_TYPE_MESSAGE, getString(R.string.Internal_error_reload_cart_please), MsgUtils.ToastLength.SHORT);
+                    dismiss();
+                }
+            }
+        });
+
+        View btnCancel = view.findViewById(R.id.dialog_update_cart_item_cancel_btn);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
+        // Set item quantity ??
+        setProgressActive(false);
+
+
+        setSpinners();
+        cantidad.setOnClickListener(this);
+        return view;
+    }
+
+    private void obetenerUnidad(String idProduct){
+        // String bodega = obtenerBodega();
+        Storage helper= new Storage(getContext());
+        Cursor cursor= null;
+        try {
+            cursor = helper.buscarItemsDetalle(idProduct, bodegas);
+            if(cursor.moveToFirst()){
+                present = cursor.getString(cursor.getColumnIndex(IVInventario.FIELD_presentacion));
+                uni = cursor.getString(cursor.getColumnIndex(IVInventario.FIELD_unidad));
+            }else{
+                Toast ts = Toast.makeText(getContext(),"No se pudo recuperar la unidad oh presentacion..", Toast.LENGTH_SHORT);
+                ts.show();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        cursor.close();
+        helper.close();
+    }
+    // Prepare quantity spinner layout
+    private List<ProductPrice> getPreciosDefault() {
+        List<ProductPrice> quantities = new ArrayList<>();
+        for (int i = 1; i <= PRICE_MAX; i++) {
+            ProductPrice q = new ProductPrice(0.0000);
+            quantities.add(q);
+        }
+        System.out.println("Product prices "+quantities);
+        return quantities;
+    }
+
+
+
+    public void agregarCamposCalculados(double pu){
+
+        double porcdesc = Double.parseDouble(descuento.getText().toString());
+        productCreated.setPorc_desc(porcdesc);
+        if(porcdesc>0)productCreated.setDesc_promo(1);
+
+        double descuent = Double.parseDouble(descuento.getText().toString());
+        double cant = Integer.parseInt(cantidad.getText().toString());
+        double porcentaje = redondearNumero(descuent / 100,"0.0000");
+        System.out.println("porcentaje desc jt: " + porcentaje);
+        double precio_total = redondearNumero(cant * pu , numdecptotal);
+        double desc = precio_total * porcentaje;
+        double precioreal = redondearNumero(((precio_total - desc)/cant),numdecpu);
+        double porc_iva = productCreated.getPorc_iva();
+        double precioreal_iva = redondearNumero((precioreal+(porc_iva*precioreal)),numdecpu);
+        double subtotal = precio_total-desc;
+        double subtotaliva = redondearNumero((subtotal+(porc_iva*subtotal)),numdecptotal);
+
+        productCreated.setPur(precioreal);
+        productCreated.setPur_iva(precioreal_iva);
+        productCreated.setPreciototal(precio_total);
+        productCreated.setPreciototalreal(subtotal);
+        productCreated.setPreciototalrealiva(subtotaliva);
+        productCreated.setDesc(desc);
+    }
+    private void addProductInCart(String productCartId,  int cantidad, double descuento, double pu, int promo) {
+        try{
+            System.out.println("addproductincart");
+            productCreated.setId(new GeneradorClaves().generarClave());
+            productCreated.setProductId(productCartId);
+            productCreated.setCantidad(cantidad);
+            productCreated.setPromocion(promo);
+            productCreated.setDesc_promo(promo);
+            productCreated.setPu(pu);
+            productCreated.setNumprecio(numprecio);
+            productCreated.setPrecioTotalFormato(numdecptotal);
+            productCreated.setPrecioUnitarioFormato(numdecpu);
+            /*Agregando fila de promocion*/
+
+            if(verificarExistenciaPromocion(productCreated.getProductId(),cantidad)){
+                //verificando existencia de descuentos
+                if(descuento>0){
+                    System.out.println("Dentro del if descuento");
+                    seleccionarDescuentoPromocion(pu);
+                }else{
+                    System.out.println("Dentro del else descuento");
+                    agregarCamposCalculados(pu);
+                    ((PedidoMegLimp) getActivity()).onProductCreate(productCreated);
+                    ProductItemCart itempromocion = this.obtenerItemPromocion(productCreated);
+                    if (itempromocion.getProductId()!=null && itempromocion.getIditempadre()!=null) {
+                        System.out.println("Dentro del if...");
+                        ((PedidoMegLimp) getActivity()).onProductCreate(itempromocion);
+                    }
+
+                    dismiss();
+                }
+            }else{
+                agregarCamposCalculados(pu);
+                ((PedidoMegLimp) getActivity()).onProductCreate(productCreated);
+                dismiss();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void seleccionarDescuentoPromocion(final double preciounitario) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+        alertDialogBuilder.setTitle(R.string.tittle_dialog_desc_promo);
+        alertDialogBuilder.setSingleChoiceItems(new String[]{"Conservar Descuento","Aplicar Promocion"}, 0, null);
+        /*Cargar Listado*/
+        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.setPositiveButton("Aplicar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                ListView lv = ((AlertDialog) dialog).getListView();
+                int posicion = lv.getCheckedItemPosition();
+                switch (posicion) {
+                    case 0:
+                        agregarCamposCalculados(preciounitario);
+                        ((PedidoMegLimp) getActivity()).onProductCreate(productCreated);
+                        dismiss();
+                        break;
+                    case 1:
+                        descuento.setText("0.0");
+                        agregarCamposCalculados(preciounitario);
+                        ((PedidoMegLimp) getActivity()).onProductCreate(productCreated);
+                        ProductItemCart itempromocion = obtenerItemPromocion(productCreated);
+                        if(itempromocion.getProductId()!=null && itempromocion.getIditempadre()!=null)
+                            ((PedidoMegLimp) getActivity()).onProductCreate(itempromocion);
+                        dismiss();
+                        break;
+                }
+                dialog.dismiss();
+            }
+        });
+        final AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+
+    private void setProgressActive(boolean active) {
+        if (active) {
+            dialogProgress.setVisibility(View.VISIBLE);
+            dialogContent.setVisibility(View.INVISIBLE);
+        } else {
+            dialogProgress.setVisibility(View.GONE);
+            dialogContent.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        //ShoppingCar.getInstance().getRequestQueue().cancelAll(CONST.UPDATE_CART_ITEM_REQUESTS_TAG);
+        super.onStop();
+    }
+
+    private List<Item> filter(List<Item> models, String query) {
+        System.out.println("LLega a buscar conincidedncias "+query);
+        query = query.toLowerCase();
+
+        final List<Item> filteredModelList = new ArrayList<>();
+        for (Item model : models) {
+            final String text = model.getDescripcion().toLowerCase();
+            final String present = model.getPresentacion().toLowerCase();
+            final String codigo = model.getCod_item().toLowerCase();
+            if (text.contains(query)||codigo.contains(query)||present.contains(query)) {
+                filteredModelList.add(model);
+            }
+        }
+        return filteredModelList;
+    }
+    private String[] getLineasParaBusqueda() {
+        if (lineaSeleccionada == null || lineaSeleccionada.trim().isEmpty()) {
+            return (lineas != null) ? lineas : new String[0];
+        }
+        return new String[]{ lineaSeleccionada };
+    }
+
+    /**********************************************************
+     ************************Adaptadores **********************
+     **********************************************************/
+    class AutoCompleteProductoSelected extends CursorAdapter implements AdapterView.OnItemClickListener {
+        Storage storage;
+        private String orden_bodegas;
+
+        public AutoCompleteProductoSelected(Context context) {
+            super(getContext(), null);
+            storage = new Storage(context);
+        }
+
+        @Override
+        public Cursor runQueryOnBackgroundThread(CharSequence constraint) {
+            Cursor cursor = null;
+            try {
+                buscar = autoCompleteItem.getText().toString();
+                cursor = storage.buscarItemsDescripcionExiste(
+                        (constraint != null ? constraint.toString() : "@@@@"),
+                        getLineasParaBusqueda(),
+                        bodegas
+                );
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return cursor;
+        }
+
+        @Override
+        public CharSequence convertToString(Cursor cursor) {
+            final String str = cursor.getString(cursor.getColumnIndex(IVInventario.FIELD_descripcion));
+            return str;
+        }
+
+
+
+      /*  public void loadPreferences(){
+            ExtraerConfiguraciones extraerConfiguraciones= new ExtraerConfiguraciones(getActivity());
+            this.orden_bodegas=extraerConfiguraciones.get(getActivity().getString(R.string.key_act_bod),getActivity().getString(R.string.pref_act_bod_default));
+        }
+
+        private void consultarPcKardexCli(String id_item){
+            Storage helper= new Storage(getActivity());
+            Cursor cursor=helper.consultarPCKardexCli(id_item);
+            if(cursor.moveToFirst()){
+                do{
+
+                }while(cursor.moveToNext());
+            }else{
+            }
+            cursor.close();
+            helper.close();
+        } */
+      @Override
+      public void bindView(View view, Context context, Cursor cursor) {
+
+          String cod_item = cursor.getString(cursor.getColumnIndex(IVInventario.FIELD_cod_item));
+          int existencia = obtenerExistenciaDetalle(cod_item);
+
+          TextView textCodigo = view.findViewById(R.id.codigo);
+          TextView textDescripcion = view.findViewById(R.id.descripcion);
+          TextView textExistencia = view.findViewById(R.id.existencia);
+          TextView textPrecio = view.findViewById(R.id.precio_final_1);
+
+          textCodigo.setVisibility(View.GONE);
+
+          String descripcion = cursor.getString(cursor.getColumnIndex(IVInventario.FIELD_descripcion));
+
+          // ⬅ LIMPIAR DESCRIPCIÓN PARA QUITAR EL PRECIO
+          String descripcionLimpia = descripcion;
+          if (descripcion.contains("Precio")) {
+              descripcionLimpia = descripcion.substring(0, descripcion.indexOf("Precio")).trim();
+          }
+
+          textDescripcion.setText(descripcionLimpia);
+
+          textExistencia.setText(String.valueOf(existencia));
+
+          String precioExtraido = "0.00";
+
+          try {
+              if (descripcion.contains("Precio")) {
+                  String afterPrecio = descripcion.substring(descripcion.indexOf("Precio") + 7).trim();
+                  precioExtraido = afterPrecio.split("\\|")[0].trim();
+              }
+          } catch (Exception e) {
+              precioExtraido = "0.00";
+          }
+
+          textPrecio.setText("$" + precioExtraido);
+      }
+
+
+        @Override
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            final LayoutInflater inflater = LayoutInflater.from(context);
+            final View view = inflater.inflate(R.layout.fila_autocomplete_producto, parent, false);
+            return view;
+        }
+
+        @Override
+        public void onItemClick(AdapterView<?> listView, View view, int position, long id) {
+            System.out.println("Ver precios disponibles: ");
+            try{
+                System.out.println("Ver precios disponi                 bles: try");
+                Cursor cursor = (Cursor) listView.getItemAtPosition(position);
+                double desc=redondearNumero(obtenerDescuentoItem(idcliente, cursor.getString(cursor.getColumnIndexOrThrow(IVInventario.FIELD_identificador))),"0.00");
+                String iditem = cursor.getString(cursor.getColumnIndexOrThrow(IVInventario.FIELD_identificador));
+                // String uniItem = cursor.getString(cursor.getColumnIndexOrThrow(IVInventario.FIELD_unidad));
+               //  String presentItem = cursor.getString(cursor.getColumnIndexOrThrow(IVInventario.FIELD_presentacion));
+                System.out.println("Escojio el item: ??? "+ iditem);
+
+
+                obetenerUnidad(iditem);
+                unidad.setText(uni);
+                boolean exist =  obtenerExistenciaItem(iditem, bodegapre, 1);
+
+                System.out.println("Este prodctuo tiene stock ??? "+exist);
+
+                presentacion.setText(present);
+
+                if(desc>0)descuento.setText(String.valueOf(desc));
+                List<ProductPrice> precios = new ArrayList<>();
+
+                System.out.println("Numprecio: "+numprecio);
+                switch (numprecio){
+                    case 1:precios.add(new ProductPrice(redondearNumero(cursor.getDouble(cursor.getColumnIndex(IVInventario.FIELD_precio1)),numdecpu)));break;
+                    case 2:precios.add(new ProductPrice(redondearNumero(cursor.getDouble(cursor.getColumnIndex(IVInventario.FIELD_precio2)),numdecpu)));break;
+                    case 3:precios.add(new ProductPrice(redondearNumero(cursor.getDouble(cursor.getColumnIndex(IVInventario.FIELD_precio3)),numdecpu)));break;
+                    case 4:precios.add(new ProductPrice(redondearNumero(cursor.getDouble(cursor.getColumnIndex(IVInventario.FIELD_precio4)),numdecpu)));break;
+                    case 5:precios.add(new ProductPrice(redondearNumero(cursor.getDouble(cursor.getColumnIndex(IVInventario.FIELD_precio5)),numdecpu)));break;
+                    case 6:precios.add(new ProductPrice(redondearNumero(cursor.getDouble(cursor.getColumnIndex(IVInventario.FIELD_precio6)),numdecpu)));break;
+                    case 7:precios.add(new ProductPrice(redondearNumero(cursor.getDouble(cursor.getColumnIndex(IVInventario.FIELD_precio7)),numdecpu)));break;
+                }
+                adapterPrice.refreshItems(precios);
+                /*Cargando objeto a retornar*/
+                productCreated.setProductId(cursor.getString(cursor.getColumnIndexOrThrow(IVInventario.FIELD_identificador)));
+                productCreated.setBandiva(cursor.getInt(cursor.getColumnIndexOrThrow(IVInventario.FIELD_band_iva)));
+                productCreated.setPorc_iva(cursor.getDouble(cursor.getColumnIndexOrThrow(IVInventario.FIELD_porc_iva)));
+                if(cantidad.getText().toString().length()>0) cantidad.setSelection(0,cantidad.getText().toString().length());
+                cantidad.requestFocus();
+                ProductPrice selectedPrice = (ProductPrice) priceSpinner.getSelectedItem();
+                double priceValue = selectedPrice.getPrice();
+                System.out.println(priceValue);
+                double precioRedondeado = redondearNumero(priceValue, numdecpu);
+                double porc_iva = productCreated.getPorc_iva();
+                double precioreal_iva = redondearNumero((priceValue+(porc_iva*priceValue)),numdecpu);
+                precioFinal.setText(String.valueOf(precioRedondeado));
+                precioFinalIva.setText(String.valueOf(precioreal_iva));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+    }
+    /**********************************************************
+     ************************Fin Adaptadores*******************
+     **********************************************************/
+    /**
+     *
+      * @param cli_id
+     * @param item_id
+     * @return
+     */
+    public double obtenerDescuentoItem(String cli_id, String item_id) {
+        double result = 0.0;
+        Storage helper = new Storage(getContext());
+        Cursor cursor = helper.consultarDescuentoItem(cli_id, item_id);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                result = cursor.getDouble(cursor.getColumnIndex(Descuento.FIELD_porcentaje));
+                Toast ts = Toast.makeText(getContext(), getString(R.string.info_descuento) + redondearNumero(result,"0.00"), Toast.LENGTH_SHORT);
+                ts.show();
+            }
+        }
+        cursor.close();
+        helper.close();
+        return result;
+    }
+
+    /**
+     * Metodo para redondeo de decimales
+     * @param numero
+     * @param clave
+     * @return
+     */
+    public double redondearNumero(double numero,String clave) {
+        DecimalFormat formateador = new DecimalFormat(clave);
+        formateador.setRoundingMode(RoundingMode.HALF_UP);
+        return Double.valueOf(formateador.format(numero).replace(",", "."));
+    }
+
+    /**
+     * Mostrar mensaje de stock en bodega predefinida
+     * @param id_item
+     * @param id_bodega
+     * @param cantidad
+     * @return
+     */
+    public boolean obtenerExistenciaItemBodegaPre(String id_item, String id_bodega, int cantidad) {
+        boolean result = false;
+        try {
+            Storage helper = new Storage(getContext());
+            Cursor cursor = helper.obtenerExistenciaItemBodega(id_item, id_bodega);
+            if (cursor.moveToFirst()) {
+                if (cursor.getInt(cursor.getColumnIndex(Existencia.FIELD_existencia)) >= cantidad) {
+                    alertaExistenciaItem(cursor.getInt(cursor.getColumnIndex(Existencia.FIELD_existencia)), cursor.getString(cursor.getColumnIndex(Bodega.FIELD_codbodega)));
+                } else {
+                    alertaStockInsuficiente();
+                }
+            } else {
+                alertaStockInsuficiente();
+            }
+            cursor.close();
+            helper.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public boolean obtenerExistenciaItem(String id_item, String id_bodega, int cantidad) {
+        boolean result = false;
+        try {
+            Storage helper = new Storage(getContext());
+            Cursor cursor = helper.obtenerExistenciaItemBodega(id_item, id_bodega);
+            if (cursor.moveToFirst()) {
+                if (cursor.getInt(cursor.getColumnIndex(Existencia.FIELD_existencia)) >= cantidad) {
+                    System.out.println("El producto si tiene stock");
+                } else {
+                    alertaStockInsuficiente();
+                }
+            }
+            cursor.close();
+            helper.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public void alertaStockInsuficiente() {
+        Toast toast = new Toast(getContext());
+        toast.setGravity(Gravity.TOP, 0, 20);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(customToastStockInsuficiente);
+        toast.show();
+    }
+
+    private void mensajeContinuarSinStock() {
+        AlertDialog.Builder quitDialog
+                = new AlertDialog.Builder(getContext());
+        quitDialog.setTitle("Sin stock");
+        quitDialog.setMessage("No cuenta con stock suficiente para esta transaccion desea continuar ?..");
+
+        quitDialog.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                if(!cantidad.getText().toString().isEmpty() && Integer.parseInt(cantidad.getText().toString())>0){
+                    ProductPrice productPrice = (ProductPrice) priceSpinner.getSelectedItem(); // lega vacio verificar
+                    Timber.d("Product Created: %s", productCreated);
+                    if (productPrice.getPrice() != 0) {
+                        if(descuento.getText().toString().isEmpty()){
+                            descuento.setText("0.00");
+                            addProductInCart(productCreated.getProductId(), Integer.parseInt(cantidad.getText().toString()),Double.parseDouble(descuento.getText().toString()),productPrice.getPrice(), Integer.parseInt(promocion.getText().toString()));
+                        }else {
+                            double desc = Double.parseDouble(descuento.getText().toString());
+                            if(desc>=0&&desc<=100){
+                                addProductInCart(productCreated.getProductId(), Integer.parseInt(cantidad.getText().toString()),desc,productPrice.getPrice(), Integer.parseInt(promocion.getText().toString()));
+                            }else{
+                                descuento.requestFocus();
+                                descuento.setError(getString(R.string.info_field_desc_no_valid));
+                            }
+                        }
+                    } else {
+                        Timber.e(new RuntimeException(), "Cannot obtain info about edited cart item.");
+                        MsgUtils.showToast(getActivity(), MsgUtils.TOAST_TYPE_MESSAGE, getString(R.string.Internal_error_reload_cart_please), MsgUtils.ToastLength.SHORT);
+                        dismiss();
+                    }
+                }else{
+                    cantidad.requestFocus();
+                    cantidad.setError(getString(R.string.info_field_no_valid));// mensaje de error
+                }
+            }
+        });
+
+        quitDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+        quitDialog.show();
+    }
+
+    public void alertaExistenciaItem(int cantidad, String bodega) {
+        ((TextView) customToastStockBodega.findViewById(R.id.toast_stock)).setText("Stock en Bodega: " + cantidad);
+        ((TextView) customToastStockBodega.findViewById(R.id.toast_bodega)).setText("Bodega Utilizada: " + bodega);
+        Toast toast = new Toast(getContext());
+        toast.setGravity(Gravity.TOP, 0, 20);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(customToastStockBodega);
+        toast.show();
+    }
+    public void setSpinners(){
+        int selectedPosition = numprecio - 1;
+        if (selectedPosition < 0){
+            selectedPosition = 0;
+        }
+        if (selectedPosition > (priceSpinner.getCount() - 1))
+            Timber.e(new RuntimeException(), "More item quantity that can be. Quantity: %d, max: %d", (selectedPosition + 1), priceSpinner.getCount());
+        else
+            priceSpinner.setSelection(selectedPosition);
+    }
+
+    /**
+     * Calculo para promociones
+     * @param id_item
+     * @param cantidad
+     */
+    public boolean verificarExistenciaPromocion(String id_item, double cantidad) {
+        System.out.println("LLega a verificar promocio");
+        Storage helper = new Storage(getContext());
+        boolean result = helper.existePromocionItem(id_item, cantidad);
+        helper.close();
+        return result;
+    }
+
+    public ProductItemCart obtenerItemPromocion(ProductItemCart producto_padre) {
+        System.out.println("Obteniendo promocion hIjo");
+        ProductItemCart item_hijo = new ProductItemCart();
+        item_hijo.setId(new GeneradorClaves().generarClave());
+        item_hijo.setIditempadre(producto_padre.getProductId());
+        item_hijo.setIdfilapadre(producto_padre.getId());
+        item_hijo.setPrecioTotalFormato(producto_padre.getPrecioTotalFormato());
+        item_hijo.setPrecioUnitarioFormato(producto_padre.getPrecioUnitarioFormato());
+        item_hijo.setNumprecio(producto_padre.getNumprecio());
+        Storage helper = new Storage(getContext());
+        Cursor cursor = helper.consultarPromocionItem(producto_padre.getProductId(),producto_padre.getCantidad());
+        if (cursor.moveToFirst()){
+            int cantidad_minima = cursor.getInt(cursor.getColumnIndex(Promocion.FIELD_cantidad_min));
+            int cantidad_promo = cursor.getInt(cursor.getColumnIndex(Promocion.FIELD_cantidad_promo));
+            item_hijo.setProductId(cursor.getString(cursor.getColumnIndex(Promocion.FIELD_id_inven_promo)));
+            System.out.println("");
+            item_hijo.setPu(cursor.getDouble(cursor.getColumnIndex(Promocion.FIELD_precio_promo)));
+            Cursor cursor1 = helper.obtenerItem(item_hijo.getProductId());
+            //Cursor cursor1 = helper.obtenerItem(item_hijo.getIditempadre()); //aqui
+            if (cursor1.moveToFirst()) {
+                item_hijo.setBandiva(cursor1.getInt(cursor1.getColumnIndex(IVInventario.FIELD_band_iva)));
+                item_hijo.setPorc_iva(cursor1.getDouble(cursor1.getColumnIndex(IVInventario.FIELD_porc_iva)));
+            }
+            cursor1.close();
+                /*cargando arreglos globales*/
+            int veces = (int) (producto_padre.getCantidad() / cantidad_minima);
+            int cantidad_total = 0;
+            for (int i = 0; i < veces; i++) cantidad_total += cantidad_promo;
+            item_hijo.setCantidad(cantidad_total);
+            double porcdesc = obtenerDescuentoItem(idcliente,item_hijo.getProductId());
+            double porcentaje = porcdesc/100;
+            double precio_total = redondearNumero(item_hijo.getCantidad() * item_hijo.getPu() , numdecptotal);
+            double desc = precio_total * porcentaje;
+            double precioreal = redondearNumero(((precio_total - desc)/item_hijo.getCantidad()),numdecpu);
+            double porc_iva = item_hijo.getPorc_iva();
+            double precioreal_iva = redondearNumero((precioreal+(porc_iva*precioreal)),numdecpu);
+            double subtotal = precio_total-desc;
+            double subtotaliva = redondearNumero((subtotal+(porc_iva*subtotal)),numdecptotal);
+
+            item_hijo.setPorc_desc(porcdesc);
+            item_hijo.setPur(precioreal);
+            item_hijo.setPur_iva(precioreal_iva);
+            item_hijo.setPreciototal(precio_total);
+            item_hijo.setPreciototalreal(subtotal);
+            item_hijo.setPreciototalrealiva(subtotaliva);
+            item_hijo.setDesc(desc);
+            item_hijo.setDesc_promo(2);
+            System.out.println("Agregando data item promo "+item_hijo);
+        }
+        cursor.close();
+        helper.close();
+        return item_hijo;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.cantidad:
+                if(new Validaciones().validar_enteros(cantidad.getText().toString())){
+                    int cant = Integer.parseInt(cantidad.getText().toString());
+                    obtenerExistenciaItemBodegaPre(this.productCreated.getProductId(), bodegapre, cant);
+                }else{
+                    cantidad.requestFocus();
+                    cantidad.setError(getString(R.string.info_field_no_valid));
+                }
+                break;
+        }
+    }
+
+
+    private void alertDialogSelectItem() {
+        android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(getContext());
+        dialog.setTitle("Sin Item:");
+        dialog.setMessage("Primero selecione un producto.......");
+
+        dialog.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+
+                    }
+                });
+
+        android.app.AlertDialog alertDialog = dialog.create();
+        alertDialog.show();
+
+    }
+
+}
