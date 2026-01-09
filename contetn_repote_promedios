@@ -4,8 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
+    android:fillViewport="true"
+    android:clipToPadding="false"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="24dp"
     android:background="@color/dividerColor"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ecuasolutions.sicimovile.ReportePromedios"
@@ -13,36 +17,36 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
         tools:context=".reportes.Historial"
-        android:background="@color/dividerColor">
+        android:background="@android:color/transparent">
         <!--Content historial-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                card_view:cardCornerRadius="12dp">
+                android:layout_marginBottom="16dp"
+                card_view:cardCornerRadius="16dp"
+                card_view:cardElevation="6dp"
+                card_view:cardUseCompatPadding="true"
+                card_view:cardPreventCornerOverlap="true">
                 <RelativeLayout
-                    android:padding="8dp"
+                    android:padding="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    //seccion cabecera
+                    <!-- seccion cabecera -->
                     <TableLayout
-                        android:layout_below="@+id/formItemTxt3"
                         android:layout_width="match_parent"
                         android:dividerPadding="5dp"
                         android:layout_height="wrap_content"
@@ -51,25 +55,26 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="5dp"
+                            android:padding="8dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:background="@drawable/line"
-                            android:textSize="15dp"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
                             android:layout_gravity="center_vertical"
                             android:layout_alignTop="@+id/thumbnail"
                             android:layout_toRightOf="@+id/thumbnail"
                             android:text="Rango de Busqueda"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:layout_marginBottom="5dp"/>
+                            android:layout_marginBottom="10dp"/>
                         <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="40dp">
+                            android:layout_height="wrap_content">
                             <TextView
                                 android:maxLines="1"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:layout_width="fill_parent"
-                                android:layout_height="40dp"
+                                android:layout_height="44dp"
                                 android:textAppearance="?android:attr/textAppearanceSmall"
                                 android:gravity="center"
                                 android:textColor="@color/textColorPrimary"
@@ -80,19 +85,20 @@
                             <TextView
                                 android:id="@+id/prom_fecha_inicio"
                                 android:layout_width="100dp"
-                                android:layout_height="40dp"
+                                android:layout_height="44dp"
                                 android:layout_weight="4"
                                 android:gravity="center"
                                 android:hint="Fecha Inicio"
                                 android:textAppearance="?android:attr/textAppearanceSmall"
                                 style="@style/login_edit_text"
+                                android:textColor="@color/textColorPrimary"
                                 android:background="@drawable/text_field"/>
                             <TextView
                                 android:layout_marginLeft="5dp"
                                 android:paddingLeft="10dp"
                                 android:paddingRight="10dp"
                                 android:layout_width="fill_parent"
-                                android:layout_height="40dp"
+                                android:layout_height="44dp"
                                 android:gravity="center"
                                 android:text="Hasta"
                                 android:maxLines="1"
@@ -103,21 +109,22 @@
                             <TextView
                                 android:id="@+id/prom_fecha_fin"
                                 android:layout_width="wrap_content"
-                                android:layout_height="40dp"
+                                android:layout_height="44dp"
                                 android:layout_weight="4"
                                 android:hint="Fecha Fin"
                                 android:background="@drawable/text_field"
                                 style="@style/login_edit_text"
+                                android:textColor="@color/textColorPrimary"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                             <Button
                                 android:id="@+id/prom_date_button"
                                 android:layout_width="wrap_content"
-                                android:layout_height="40dp"
+                                android:layout_height="44dp"
                                 android:layout_marginLeft="10dp"
                                 android:background="@drawable/button_controls"
-                                android:layout_marginBottom="5dp"
+                                android:layout_marginBottom="0dp"
                                 android:textColor="@color/textColor"
-                                android:text="buscar" />
+                                android:text="Buscar" />
                         </TableRow>
                     </TableLayout>
                 </RelativeLayout>
@@ -126,20 +133,20 @@
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                card_view:cardCornerRadius="12dp">
+                android:layout_marginBottom="16dp"
+                card_view:cardCornerRadius="16dp"
+                card_view:cardElevation="6dp"
+                card_view:cardUseCompatPadding="true"
+                card_view:cardPreventCornerOverlap="true">
                 <RelativeLayout
                     android:id="@+id/contenedorItems"
-                    android:padding="8dp"
+                    android:padding="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    //seccion cabecera
+                    <!-- seccion cabecera -->
                     <TableLayout
                         android:id="@+id/sectionCliente"
-                        android:layout_below="@+id/formItemTxt3"
                         android:layout_width="match_parent"
                         android:dividerPadding="5dp"
                         android:layout_height="wrap_content"
@@ -149,16 +156,17 @@
                             android:id="@+id/formItemTxt4"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="5dp"
+                            android:padding="8dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:background="@drawable/line"
-                            android:textSize="15dp"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
                             android:layout_gravity="center_vertical"
                             android:layout_alignTop="@+id/thumbnail"
                             android:layout_toRightOf="@+id/thumbnail"
                             android:text="Informacion del Cliente"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:layout_marginBottom="5dp"/>
+                            android:layout_marginBottom="10dp"/>
                         <TableRow
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -176,10 +184,12 @@
                             <TextView
                                 android:id="@+id/promedioCedula"
                                 android:layout_width="wrap_content"
-                                android:layout_height="40dp"
+                                android:layout_height="44dp"
                                 android:layout_weight="4"
                                 android:hint="Numero de Cedula/RUC"
                                 android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="@color/textColorPrimary"
+                                android:background="@drawable/text_field"
                                 style="@style/login_edit_text"/>
                         </TableRow>
 
@@ -199,10 +209,12 @@
                             <TextView
                                 android:id="@+id/promedioNombres"
                                 android:layout_width="wrap_content"
-                                android:layout_height="40dp"
+                                android:layout_height="44dp"
                                 android:layout_weight="4"
                                 android:hint="Nombres y Apellidos"
                                 android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="@color/textColorPrimary"
+                                android:background="@drawable/text_field"
                                 style="@style/login_edit_text"/>
                         </TableRow>
 
@@ -223,10 +235,12 @@
                             <TextView
                                 android:id="@+id/promedioAlterno"
                                 android:layout_width="wrap_content"
-                                android:layout_height="40dp"
+                                android:layout_height="44dp"
                                 android:layout_weight="4"
                                 android:hint="Nombre Alterno"
                                 android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="@color/textColorPrimary"
+                                android:background="@drawable/text_field"
                                 style="@style/login_edit_text"/>
                         </TableRow>
                     </TableLayout>
@@ -240,18 +254,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                card_view:cardCornerRadius="12dp">
+                card_view:cardCornerRadius="16dp"
+                card_view:cardElevation="6dp"
+                card_view:cardUseCompatPadding="true"
+                card_view:cardPreventCornerOverlap="true">
                 <RelativeLayout
-                    android:padding="8dp"
+                    android:padding="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    //seccion cabecera
+                    <!-- seccion cabecera -->
                     <TableLayout
                         android:id="@+id/cabeceraHistorial"
-                        android:layout_below="@+id/formItemTxt3"
                         android:layout_width="match_parent"
                         android:dividerPadding="5dp"
                         android:layout_height="wrap_content"
@@ -261,145 +275,150 @@
                             android:id="@+id/formItemTxt7"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="5dp"
+                            android:padding="8dp"
                             android:textColor="@color/colorPrimaryDark"
                             android:background="@drawable/line"
-                            android:textSize="15dp"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
                             android:layout_gravity="center_vertical"
                             android:layout_alignTop="@+id/thumbnail"
                             android:layout_toRightOf="@+id/thumbnail"
                             android:text="Informacion de Pagos Realizados"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:layout_marginBottom="5dp"/>
+                            android:layout_marginBottom="10dp"/>
                     </TableLayout>
                     <!--Tabla de items a vender-->
                     <LinearLayout
                         android:id="@+id/nuevoPedidoContenedorTabla"
                         android:layout_below="@+id/cabeceraHistorial"
                         android:orientation="horizontal"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
                         android:layout_weight="1">
-                        <TableLayout
-                            android:id="@+id/promedioTableLayout"
-                            android:layout_width="wrap_content"
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:shrinkColumns="*"
-                            android:stretchColumns="1">
-                            <TableRow
+                            android:fillViewport="true"
+                            android:scrollbars="none">
+                            <TableLayout
+                                android:id="@+id/promedioTableLayout"
                                 android:layout_width="wrap_content"
-                                android:layout_height="fill_parent"
-                                android:layout_marginBottom="5dp">
-                                <TextView
+                                android:layout_height="wrap_content"
+                                android:shrinkColumns="*"
+                                android:stretchColumns="1">
+                                <TableRow
                                     android:layout_width="wrap_content"
-                                    android:layout_height="30dp"
-                                    android:gravity="center"
-                                    android:background="@drawable/header_fields"
-                                    android:text="Nro"
-                                    android:layout_marginLeft="1dp"
-                                    android:paddingLeft="5dp"
-                                    android:paddingRight="5dp"
-                                    android:layout_span="1"/>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="30dp"
-                                    android:gravity="center"
-                                    android:background="@drawable/header_fields"
-                                    android:text="Transaccion"
-                                    android:layout_marginLeft="1dp"
-                                    android:paddingLeft="10dp"
-                                    android:paddingRight="10dp"
-                                    android:layout_span="1"/>
+                                    android:layout_height="fill_parent"
+                                    android:layout_marginBottom="5dp">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="32dp"
+                                        android:gravity="center"
+                                        android:background="@drawable/header_fields"
+                                        android:text="Nro"
+                                        android:layout_marginLeft="1dp"
+                                        android:paddingLeft="8dp"
+                                        android:paddingRight="8dp"
+                                        android:layout_span="1"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="32dp"
+                                        android:gravity="center"
+                                        android:background="@drawable/header_fields"
+                                        android:text="Transaccion"
+                                        android:layout_marginLeft="1dp"
+                                        android:paddingLeft="12dp"
+                                        android:paddingRight="12dp"
+                                        android:layout_span="1"/>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:layout_marginRight="1dp"
-                                    android:layout_marginLeft="1dp"
-                                    android:background="@drawable/header_fields"
-                                    android:text="Emision"
-                                    android:layout_span="1"
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="32dp"
+                                        android:gravity="center"
+                                        android:layout_marginRight="1dp"
+                                        android:layout_marginLeft="1dp"
+                                        android:background="@drawable/header_fields"
+                                        android:text="Emision"
+                                        android:layout_span="1"></TextView>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="32dp"
+                                        android:gravity="center"
+                                        android:paddingLeft="8dp"
+                                        android:paddingRight="8dp"
+                                        android:layout_marginRight="1dp"
+                                        android:layout_marginLeft="1dp"
+                                        android:background="@drawable/header_fields"
+                                        android:text="PL"
+                                        android:layout_span="1"></TextView>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="32dp"
+                                        android:gravity="center"
+                                        android:paddingLeft="8dp"
+                                        android:paddingRight="8dp"
+                                        android:layout_marginRight="1dp"
+                                        android:layout_marginLeft="1dp"
+                                        android:background="@drawable/header_fields"
+                                        android:text="Vencimiento"
+                                        android:layout_span="1"></TextView>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="32dp"
+                                        android:gravity="center"
+                                        android:paddingLeft="8dp"
+                                        android:paddingRight="8dp"
+                                        android:layout_marginRight="1dp"
+                                        android:layout_marginLeft="1dp"
+                                        android:background="@drawable/header_fields"
+                                        android:text="Valor"
+                                        android:layout_span="1"></TextView>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="32dp"
+                                        android:gravity="center"
+                                        android:background="@drawable/header_fields"
+                                        android:text="F.Pago"
+                                        android:layout_marginLeft="1dp"
+                                        android:paddingLeft="12dp"
+                                        android:paddingRight="12dp"
+                                        android:layout_span="1"/>
 
-                                    ></TextView>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:paddingLeft="5dp"
-                                    android:paddingRight="5dp"
-                                    android:layout_marginRight="1dp"
-                                    android:layout_marginLeft="1dp"
-                                    android:background="@drawable/header_fields"
-                                    android:text="PL"
-                                    android:layout_span="1"></TextView>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:paddingLeft="5dp"
-                                    android:paddingRight="5dp"
-                                    android:layout_marginRight="1dp"
-                                    android:layout_marginLeft="1dp"
-                                    android:background="@drawable/header_fields"
-                                    android:text="Vencimiento"
-                                    android:layout_span="1"></TextView>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:paddingLeft="5dp"
-                                    android:paddingRight="5dp"
-                                    android:layout_marginRight="1dp"
-                                    android:layout_marginLeft="1dp"
-                                    android:background="@drawable/header_fields"
-                                    android:text="Valor"
-                                    android:layout_span="1"></TextView>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="30dp"
-                                    android:gravity="center"
-                                    android:background="@drawable/header_fields"
-                                    android:text="F.Pago"
-                                    android:layout_marginLeft="1dp"
-                                    android:paddingLeft="10dp"
-                                    android:paddingRight="10dp"
-                                    android:layout_span="1"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="32dp"
+                                        android:gravity="center"
+                                        android:background="@drawable/header_fields"
+                                        android:text="Saldo"
+                                        android:layout_marginLeft="1dp"
+                                        android:paddingLeft="12dp"
+                                        android:paddingRight="12dp"
+                                        android:layout_span="1"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="32dp"
+                                        android:gravity="center"
+                                        android:background="@drawable/header_fields"
+                                        android:text="D.M"
+                                        android:layout_marginLeft="1dp"
+                                        android:paddingLeft="12dp"
+                                        android:paddingRight="12dp"
+                                        android:layout_span="1"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="32dp"
+                                        android:gravity="center"
+                                        android:background="@drawable/header_fields"
+                                        android:text="D.C"
+                                        android:layout_marginLeft="1dp"
+                                        android:paddingLeft="12dp"
+                                        android:paddingRight="12dp"
+                                        android:layout_span="1"/>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="30dp"
-                                    android:gravity="center"
-                                    android:background="@drawable/header_fields"
-                                    android:text="Saldo"
-                                    android:layout_marginLeft="1dp"
-                                    android:paddingLeft="10dp"
-                                    android:paddingRight="10dp"
-                                    android:layout_span="1"/>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="30dp"
-                                    android:gravity="center"
-                                    android:background="@drawable/header_fields"
-                                    android:text="D.M"
-                                    android:layout_marginLeft="1dp"
-                                    android:paddingLeft="10dp"
-                                    android:paddingRight="10dp"
-                                    android:layout_span="1"/>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="30dp"
-                                    android:gravity="center"
-                                    android:background="@drawable/header_fields"
-                                    android:text="D.C"
-                                    android:layout_marginLeft="1dp"
-                                    android:paddingLeft="10dp"
-                                    android:paddingRight="10dp"
-                                    android:layout_span="1"/>
-
-                            </TableRow>
-                        </TableLayout>
+                                </TableRow>
+                            </TableLayout>
+                        </HorizontalScrollView>
 
                     </LinearLayout>
 
