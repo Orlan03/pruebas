@@ -1,8 +1,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/dividerColor"
+    android:clipToPadding="false"
+    android:fillViewport="true"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
@@ -16,19 +18,25 @@
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="14dp"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="8dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
@@ -43,7 +51,7 @@
                     android:layout_below="@id/formItemTxt1"
                     android:textAppearance="?android:textAppearanceSmall"
                     android:textColor="@color/textColorSecondary"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
                     android:layout_marginTop="1dip"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:text="Sin definir" />
@@ -54,19 +62,25 @@
             android:id="@+id/card_view2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="14dp"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="8dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
@@ -76,10 +90,11 @@
                     android:id="@+id/formItemTxt4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
                     android:textColor="@color/textColorSecondary"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
                     android:layout_below="@id/formItemTxt3"
                     android:textAppearance="?android:textAppearanceSmall"
                     android:layout_marginTop="1dip"
@@ -91,19 +106,25 @@
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="14dp"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="8dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
@@ -113,13 +134,14 @@
                     android:id="@+id/formItemTxt6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
                     android:layout_below="@id/formItemTxt5"
                     android:textAppearance="?android:textAppearanceSmall"
                     android:layout_marginTop="1dip"
                     android:textColor="@color/textColorSecondary"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:text="Sin definir" />
             </RelativeLayout>
@@ -128,35 +150,42 @@
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="14dp"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt51"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="8dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Presentacion"
+                    android:text="Presentación"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:id="@+id/formItemTxt66"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
                     android:layout_below="@id/formItemTxt51"
                     android:textAppearance="?android:textAppearanceSmall"
                     android:layout_marginTop="1dip"
                     android:textColor="@color/textColorSecondary"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:text="Sin definir" />
             </RelativeLayout>
@@ -166,19 +195,25 @@
             android:id="@+id/card_view15"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="14dp"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt53"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="8dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
@@ -188,10 +223,11 @@
                     android:id="@+id/formItemTxt54"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
                     android:textColor="@color/textColorSecondary"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
                     android:layout_below="@id/formItemTxt53"
                     android:textAppearance="?android:textAppearanceSmall"
                     android:layout_marginTop="1dip"
@@ -204,19 +240,25 @@
             android:id="@+id/card_view1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="14dp"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt56"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="8dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
@@ -226,10 +268,11 @@
                     android:id="@+id/formItemTxt57"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
                     android:textColor="@color/textColorSecondary"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
                     android:layout_below="@id/formItemTxt56"
                     android:textAppearance="?android:textAppearanceSmall"
                     android:layout_marginTop="1dip"
@@ -242,19 +285,25 @@
             android:id="@+id/card_view3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="14dp"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt52"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="8dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
@@ -264,10 +313,11 @@
                     android:id="@+id/formItemTxt67"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
                     android:textColor="@color/textColorSecondary"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
                     android:layout_below="@id/formItemTxt52"
                     android:textAppearance="?android:textAppearanceSmall"
                     android:layout_marginTop="1dip"
@@ -280,9 +330,14 @@
             android:id="@+id/card_view4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="14dp"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
@@ -290,26 +345,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:padding="5dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="8dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Listado de Precioso1"
+                    android:text="Listado de Precios"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <Button
                     android:id="@+id/show"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
                     android:text="@string/ver_precios"
                     android:textAllCaps="true"
                     android:textColor="@color/colorAccent"
                     android:background="?attr/selectableItemBackground"
-                    android:textSize="10dip" />
+                    android:textSize="12sp" />
                 <TextView
                     android:id="@+id/formItemTxt28"
                     android:layout_below="@+id/formItemTxt7"
@@ -500,23 +562,29 @@
             android:id="@+id/card_view5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="14dp"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="8dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:text="Paga IVA"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:id="@+id/formItemTxt12"
@@ -541,7 +609,7 @@
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:text="Porcentaje"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:textColor="@color/colorPrimary"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
@@ -564,23 +632,29 @@
             android:id="@+id/card_view10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="14dp"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formItemTxt25"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="8dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Categorizacion"
+                    android:text="Categorización"
                     android:layout_marginBottom="10dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
@@ -762,7 +836,7 @@
                     android:layout_height="wrap_content"
                     android:padding="3dp"
                     android:paddingTop="5dp"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center_vertical"
@@ -787,7 +861,7 @@
                     android:layout_height="wrap_content"
                     android:padding="3dp"
                     android:paddingTop="5dp"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_marginLeft="10dp"
                     android:layout_gravity="center_vertical"
@@ -813,10 +887,15 @@
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1">
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="14dp"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="8dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
@@ -824,10 +903,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:padding="5dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="8dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
@@ -852,7 +932,7 @@
                             android:layout_marginLeft="1dp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
-                            android:textSize="12dp"
+                            android:textSize="12sp"
                             android:textColor="@color/textColorPrimary"
                             android:layout_span="1"
                             android:layout_weight="1"/>
@@ -867,7 +947,7 @@
                             android:layout_marginLeft="1dp"
                             android:background="@drawable/header_fields"
                             android:text="Bodega"
-                            android:textSize="12dp"
+                            android:textSize="12sp"
                             android:textColor="@color/textColorPrimary"
                             android:layout_span="2"
                             android:layout_weight="2"></TextView>
@@ -881,12 +961,10 @@
                             android:text="Stock"
                             android:paddingLeft="20dp"
                             android:paddingRight="20dp"
-                            android:textSize="12dp"
+                            android:textSize="12sp"
                             android:textColor="@color/textColorPrimary"
                             android:layout_weight="1"
                             android:layout_span="1"/>
-
-                        />
                     </TableRow>
                 </TableLayout>
             </RelativeLayout>
@@ -895,23 +973,30 @@
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view12"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            card_view:cardBackgroundColor="@android:color/white"
+            card_view:cardCornerRadius="14dp"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true">
             <RelativeLayout
-                android:padding="12dp"
+                android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/formClienteTxt34"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="8dp"
                     android:textColor="@color/colorPrimary"
                     android:background="@drawable/line"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:layout_gravity="center_vertical"
                     android:layout_alignTop="@+id/thumbnail"
                     android:layout_toRightOf="@+id/thumbnail"
-                    android:text="Ult. Modificacion"
+                    android:text="Últ. modificación"
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView
                     android:id="@+id/formItemTxt39"
@@ -922,7 +1007,7 @@
                     android:layout_below="@id/formClienteTxt34"
                     android:textAppearance="?android:textAppearanceSmall"
                     android:layout_marginTop="1dip"
-                    android:textSize="12dp"
+                    android:textSize="13sp"
                     android:textColor="@color/textColorPrimary"
                     android:layout_toRightOf="@+id/thumbnail"
                     android:text="Sin definir" />
